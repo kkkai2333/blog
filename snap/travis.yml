@@ -17,6 +17,8 @@ script:
   # - . deploy.sh # 这里可以调用之前写好的deploy.sh文件进行发布
   - npm run docs:build
 
+branch:
+  - gh-pages
 deploy:
   provider: pages
   skip-cleanup: true
@@ -24,4 +26,4 @@ deploy:
   github-token: $GITHUB_TOKEN1 # Set in travis-ci.org dashboard
   keep-history: true
   on:
-    branch: gh-pages
+    branch: master
