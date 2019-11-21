@@ -24,4 +24,4 @@ deploy:
   github-token: $GITHUB_TOKEN1 # Set in travis-ci.org dashboard 3b8822bcadb3ac1e10e70ae20d9847c963a4ec9b
   keep-history: true
   on:
-    branch: master
+    branch: gh-pages
