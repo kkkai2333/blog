@@ -19,7 +19,7 @@ const openArr = [
 module.exports = {
     title: 'IT Forever Young',
     description: 'IT Forever Young',
-    base: "/",
+    base: "/gh-pages",
     head: [
 
     ],

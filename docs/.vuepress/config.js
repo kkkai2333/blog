@@ -19,12 +19,12 @@ const openArr = [
 module.exports = {
     title: 'IT Forever Young',
     description: 'IT Forever Young',
-    base: "/",
+    base: "/gh-pages",
     head: [
 
     ],
     locales: {
-        "/": {
+        "/gh-pages": {
             lang: "简体中文",
             selectText: "Languages",
             title: "",
