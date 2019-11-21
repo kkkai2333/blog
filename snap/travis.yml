@@ -14,8 +14,8 @@ install:
   - npm install -g vuepress
 
 script:
-  - . deploy.sh
-  # - npm run docs:build
+  # - . deploy.sh
+  - npm run docs:build
 
 deploy:
   provider: pages
