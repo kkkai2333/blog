@@ -1,0 +1,27 @@
+language: node_js
+# sudo: required
+node_js:
+  - lts/*
+cache:
+  directories:
+    - "node_modules"
+
+install:
+  # - npm ci
+  # - npm install
+  # - npm run build
+  - npm ci
+  - npm install -g vuepress
+
+script:
+  - . deploy.sh
+  # - npm run docs:build
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local_dir: docs/.vuepress/dist
+  github-token: $GITHUB_TOKEN # Set in travis-ci.org dashboard 3b8822bcadb3ac1e10e70ae20d9847c963a4ec9b
+  keep-history: true
+  on:
+    branch: master
