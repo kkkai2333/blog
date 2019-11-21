@@ -19,7 +19,7 @@ const openArr = [
 module.exports = {
     title: 'IT Forever Young',
     description: 'IT Forever Young',
-    base: "/gh-pages",
+    base: "/",
     head: [
 
     ],
@@ -28,10 +28,11 @@ module.exports = {
             lang: "简体中文",
             selectText: "Languages",
             title: "",
-            description: "",
+            description: ""
         }
     },
     themeConfig: {
+        // 这里定义的是导航栏
         nav: [
             {
                 text: "Java",
@@ -45,6 +46,19 @@ module.exports = {
                 text: "分享",
                 link: "/open/"
             },
+            {
+                text: "选择语言",
+                items: [
+                    {
+                        text: "简体中文",
+                        link: "/"
+                    },
+                    {
+                        text: "不支持English",
+                        link:"/en/"
+                    }
+                ]
+            },
             //{
             //    text: "Github",
             //    link: "https://github.com/Damon-kz/ItForeverYoung"
@@ -54,43 +68,33 @@ module.exports = {
                 link: "https://www.google.com"
             }
         ],
+        // 这里定义的是侧边栏
         sidebar: {
             '/java/': [
                 {
-                    title: "这边是Java",
+                    title: "这里是Java",
                     collapsable: true,
                     children: javaArr
                 }
             ],
             '/algorithm/': [
                 {
-                    title: "这边是算法",
+                    title: "这里是算法",
                     collapsable: false,
                     children: algorithmArr
                 }
             ],
             '/open/': [
                 {
-                    title: "这边是随便分享",
-                    collapsable: true,
+                    title: "这里是随便分享",
+                    collapsable: false,
                     children: openArr
                 }
             ]
-        },
-        lastUpdated: 'Last Updated',
-        locales: {
-            "/": {
-                lang: "简体中文",
-                selectText: "Languages",
-                editLinkText: "update on github",
-                title: "",
-                description: "",
-            }
         }
     },
     markdown: {
         lineNumber: true
 
     }
-
 }
