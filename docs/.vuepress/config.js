@@ -46,6 +46,7 @@ module.exports = {
                 text: "分享",
                 link: "/open/"
             },
+            /**
             {
                 text: "选择语言",
                 items: [
@@ -59,10 +60,13 @@ module.exports = {
                     }
                 ]
             },
-            //{
-            //    text: "Github",
-            //    link: "https://github.com/Damon-kz/ItForeverYoung"
-            //},
+            */
+            /*
+            {
+                text: "Github",
+                link: "https://github.com/Damon-kz/ItForeverYoung"
+            },
+            */
             {
                 text: "404",
                 link: "https://www.google.com"
@@ -91,7 +95,9 @@ module.exports = {
                     children: openArr
                 }
             ]
-        }
+        },
+        // 1 提取到h2级别标题，2提取到h3级别标题
+        sidebarDepth: 1
     },
     markdown: {
         lineNumber: true
