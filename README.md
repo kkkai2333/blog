@@ -1,3 +1,3 @@
 # Blog
-## URL
-  https://damon-kz.github.io/ItForeverYoung/
+## WebSite
+ https://blog.holmess.top/
