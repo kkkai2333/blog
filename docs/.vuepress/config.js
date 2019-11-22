@@ -46,7 +46,7 @@ module.exports = {
                 text: "分享",
                 link: "/open/"
             },
-            /**
+            /*
             {
                 text: "选择语言",
                 items: [
@@ -61,14 +61,12 @@ module.exports = {
                 ]
             },
             */
-            /*
             {
                 text: "Github",
                 link: "https://github.com/Damon-kz/ItForeverYoung"
             },
-            */
             {
-                text: "404",
+                text: "404 website",
                 link: "https://www.google.com"
             }
         ],
@@ -96,7 +94,7 @@ module.exports = {
                 }
             ]
         },
-        // 1 提取到h2级别标题，2提取到h3级别标题
+        // 1: 提取到h2级别标题，2: 提取到h3级别标题
         sidebarDepth: 1
     },
     markdown: {
