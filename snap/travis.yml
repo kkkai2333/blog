@@ -17,8 +17,6 @@ script:
   # - . deploy.sh # 这里可以调用之前写好的deploy.sh文件进行发布
   - npm run docs:build
 
-branch:
-  - gh-pages
 deploy:
   provider: pages
   skip-cleanup: true
