@@ -11,7 +11,7 @@ const javaArr = [
 ];
 
 const openArr = [
-    "open1",
+    "how to build blog",
     "open2",
     "open3"
 ];
@@ -46,6 +46,7 @@ module.exports = {
                 text: "分享",
                 link: "/open/"
             },
+            /*
             {
                 text: "选择语言",
                 items: [
@@ -59,12 +60,13 @@ module.exports = {
                     }
                 ]
             },
-            //{
-            //    text: "Github",
-            //    link: "https://github.com/Damon-kz/ItForeverYoung"
-            //},
+            */
             {
-                text: "404",
+                text: "Github",
+                link: "https://github.com/Damon-kz/ItForeverYoung"
+            },
+            {
+                text: "404 website",
                 link: "https://www.google.com"
             }
         ],
@@ -91,7 +93,9 @@ module.exports = {
                     children: openArr
                 }
             ]
-        }
+        },
+        // 1: 提取到h2级别标题，2: 提取到h3级别标题
+        sidebarDepth: 1
     },
     markdown: {
         lineNumber: true
