@@ -60,13 +60,13 @@ module.exports = {
                     }
                 ]
             },
-            */
             {
                 text: "Github",
                 link: "https://github.com/Damon-kz/ItForeverYoung"
             },
+            */
             {
-                text: "404 website",
+                text: "404",
                 link: "https://www.google.com"
             }
         ],
