@@ -14,10 +14,10 @@ install:
   - npm install -g vuepress
 
 script:
-  # - . deploy.sh # 这里可以调用之前写好的deploy.sh文件进行发布
-  - npm run docs:build
-  - cd docs/.vuepress/dist
-  - echo 'blog.holmess.top' > CNAME
+  - . deploy.sh # 这里可以调用之前写好的deploy.sh文件进行发布
+  # - npm run docs:build
+  # - cd docs/.vuepress/dist
+  # - echo 'blog.holmess.top' > CNAME
 
 deploy:
   provider: pages
