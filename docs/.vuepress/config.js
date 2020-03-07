@@ -11,7 +11,7 @@ const javaArr = [
 ];
 
 const openArr = [
-    "how to build blog",
+    "how-to-build-blog",
     "open2",
     "open3"
 ];
