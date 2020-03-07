@@ -1,3 +1,2 @@
 # Blog
-## WebSite
- https://blog.holmess.top/
+https://blog.itforeveryoung.cn/
