@@ -1,19 +1,19 @@
 const algorithmArr = [
-    "test1",
-    "test2",
-    "test3"
+    "test1"
 ];
 
 const javaArr = [
-    "java1",
-    "java2",
-    "java3"
+    "java1"
 ];
 
 const openArr = [
-    "how-to-build-blog",
-    "open2",
-    "open3"
+    "how-to-build-redis-cluster",
+    "how-to-build-blog"
+];
+
+const interviewArr = [
+    "spring-bean-life-cycle",
+    "spring-bean-circular-dependency"
 ];
 
 module.exports = {
@@ -32,6 +32,7 @@ module.exports = {
         }
     },
     themeConfig: {
+        // logo: "./public/logo.png",
         // 这里定义的是导航栏
         nav: [
             {
@@ -46,7 +47,19 @@ module.exports = {
                 text: "分享",
                 link: "/open/"
             },
-            /*
+            {
+                text: "面试专题",
+                link: "/interview/"
+            },
+            {
+                text: "Github",
+                link: "https://github.com/itForeverYoung/ItForeverYoung"
+            },
+            {
+                text: "404",
+                link: "https://www.google.com"
+            }
+            /*,
             {
                 text: "选择语言",
                 items: [
@@ -59,16 +72,8 @@ module.exports = {
                         link:"/en/"
                     }
                 ]
-            },
-            {
-                text: "Github",
-                link: "https://github.com/Damon-kz/ItForeverYoung"
-            },
-            */
-            {
-                text: "404",
-                link: "https://www.google.com"
             }
+            */
         ],
         // 这里定义的是侧边栏
         sidebar: {
@@ -91,6 +96,13 @@ module.exports = {
                     title: "这里是随便分享",
                     collapsable: false,
                     children: openArr
+                }
+            ],
+            '/interview/': [
+                {
+                    title: "这里是面试专题",
+                    collapsable: false,
+                    children: interviewArr
                 }
             ]
         },

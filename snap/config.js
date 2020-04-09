@@ -1,19 +1,15 @@
-const algorithmArr = [
-    "test1",
-    "test2",
-    "test3"
-];
-
 const javaArr = [
-    "java1",
-    "java2",
-    "java3"
+    "java1"
 ];
-
+const algorithmArr = [
+    "test1"
+];
 const openArr = [
-    "how to build blog",
-    "open2",
-    "open3"
+    "how-to-build-blog",
+    "how-to-build-redis-cluster"
+];
+const interviewArr = [
+    "spring-circular-dependency"
 ];
 
 module.exports = {
@@ -45,6 +41,10 @@ module.exports = {
             {
                 text: "分享",
                 link: "/open/"
+            },
+            {
+                text: "面试专题",
+                link: "/interview/"
             },
             /*
             {
@@ -91,6 +91,13 @@ module.exports = {
                     title: "这里是随便分享",
                     collapsable: false,
                     children: openArr
+                }
+            ],
+            '/interview/': [
+                {
+                    title: "这里是面试专题",
+                    collapsable: false,
+                    children: interviewArr
                 }
             ]
         },
