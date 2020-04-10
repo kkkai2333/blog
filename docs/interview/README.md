@@ -7,12 +7,13 @@
 
 * Hashmap
 * ConcurrentHashMap
-* AQS
+* AbstractQueuedSynchronizer
 * ReentrantLock
+* ReadWriteLock
 * Atomic*
 * synchronized
-* volatile关键字
-* Java内存模型
+* volatile 关键字
+* Java 内存模型
 * 线程池的实现
 * int的拆箱和装箱
 * 链表的层次变量
@@ -20,22 +21,30 @@
 
 ## JVM
 
-* 有哪些主流的垃圾收集器
-* CMS垃圾收集器的工作原理
 * 了解哪些GC算法
-* jvm如何优化
+  * 标记-清除
+  * 标记-整理
+  * 分代理论-复制算法
+  * 基于Region的算法
+* 对象已死吗
+  * 引用计数算法
+  * 可达性分析算法
+* 有哪些主流的垃圾收集器
+  * CMS
+  * G1 (jdk 9)
+  * ZGC (jdk 11)
+* CMS垃圾收集器的工作原理
+* JVM如何优化
 
 ## Spring Framework
 
 * Spring 是什么
-
 * IOC 和 AOP
-
 * Spring Bean 的生命周期
-
 * Spring Bean 循环依赖
-
 * Spring 依赖注入
+* Spring 后置处理器
+* @Autowried和@Resource的区别
 
 ## Mybatis
 
@@ -43,7 +52,7 @@
 
 ## MySQL
 
-* 数据库的mvcc, rc和rr
+* 数据库的 mvcc, rc 和 rr
   * mvcc，多版本并发控制
   * rc，读已提交
   * rr，可重复读
@@ -59,7 +68,7 @@
 
 ## Spring Boot
 
-* Spring boot的自动装配
+* Spring boot 的自动装配
 
 ## Spring Cloud
 
@@ -71,7 +80,7 @@
 
 ## Redis
 
-* Redis模型
+* Redis 模型
 
 * 缓存的三大问题
 

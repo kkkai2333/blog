@@ -1,5 +1,5 @@
 const algorithmArr = [
-    "test1"
+    "algorithm1"
 ];
 
 const javaArr = [
@@ -35,6 +35,7 @@ module.exports = {
         // logo: "./public/logo.png",
         // 这里定义的是导航栏
         nav: [
+            /**
             {
                 text: "Java",
                 link: "/java/"
@@ -47,6 +48,7 @@ module.exports = {
                 text: "分享",
                 link: "/open/"
             },
+            **/
             {
                 text: "面试专题",
                 link: "/interview/"
@@ -77,6 +79,7 @@ module.exports = {
         ],
         // 这里定义的是侧边栏
         sidebar: {
+            /**    
             '/java/': [
                 {
                     title: "这里是Java",
@@ -98,6 +101,7 @@ module.exports = {
                     children: openArr
                 }
             ],
+             */
             '/interview/': [
                 {
                     title: "这里是面试专题",
