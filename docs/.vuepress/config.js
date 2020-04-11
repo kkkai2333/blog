@@ -12,8 +12,14 @@ const openArr = [
 ];
 
 const interviewArr = [
+    "Java",
+    "Spring",
     "spring-bean-life-cycle",
-    "spring-bean-circular-dependency"
+    "spring-bean-circular-dependency",
+    "mybatis",
+    "MySQL",
+    "Redis",
+    "MongoDB"
 ];
 
 module.exports = {
