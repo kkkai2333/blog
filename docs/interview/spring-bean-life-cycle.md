@@ -1,4 +1,2 @@
-# spring bean的生命周期
-
-## why
+# Spring bean 生命周期
 

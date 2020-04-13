@@ -13,13 +13,21 @@ const openArr = [
 
 const interviewArr = [
     "Java",
+    "JVM",
     "Spring",
-    "spring-bean-life-cycle",
-    "spring-bean-circular-dependency",
-    "mybatis",
+    "Spring-bean-life-cycle",
+    "Spring-bean-circular-dependency",
+    "Mybatis",
     "MySQL",
     "Redis",
-    "MongoDB"
+    "MongoDB",
+    "MQ",
+    "ElasticSearch",
+    "Docker",
+    "设计模式",
+    "排序算法",
+    "经典数据结构"
+    
 ];
 
 module.exports = {
