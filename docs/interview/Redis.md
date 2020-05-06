@@ -14,13 +14,28 @@
 
 #### 高级数据类型
 
-* bitmap
+* bitmap（位图）
 * stream
+
+#### 底层数据结构
+
+* dict（字典）
+* sds（可扩展字符串）
+* robj（Redis对象）
+* ziplist（特殊的双向链表）
+* quicklist（快速索引表）
+* skiplist（跳表）
+* intset（int集合）
+
+**参考文章：[Redis内部数据结构详解](http://zhangtielei.com/posts/server.html)**
 
 ### Redis 持久化策略
 
 * rdb
 * aof
+* mix 混合持久化模式
+* 为什么会出现混合持久化策略，
+* 生产环境应主要用哪种持久化策略
 
 ### Redis 的删除策略
 
@@ -31,11 +46,9 @@
 * 缓存雪崩
 * 延伸问题：缓存和数据库的双写一致性
 
-### 一致性hash
+### 一致性hash算法
 
 ### 布隆过滤器
-
-### 底层数据结构sds和跳表
 
 ### Redis 主从配置
 

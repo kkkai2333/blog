@@ -12,7 +12,7 @@ npm run docs:build
 cd docs/.vuepress/dist
 
 # 如果要发布到私人域名
-echo 'blog.holmess.top' > CNAME
+echo 'blog.itforeveryoung.cn' > CNAME
 
 # 提交到github
 # git init
