@@ -1,33 +1,45 @@
 # Spring
 
-## Spring
+## Spring 是什么
 
-### Spring 是什么
+## IOC
 
-### IOC 和 AOP
+### 什么是 Spring IOC 容器
 
-### Spring Bean 的生命周期
+### 什么是依赖注入
 
-### Spring Bean 是否支持循环依赖，如何实现的，为什么要使用三级缓存
+## 什么是Spring bean
 
-### Spring 后置处理器
+## Spring bean 有几种scope
 
-### Spring 依赖注入
+**注：仅当使用支持web的ApplicationContext时，后三种才可用**
+
+* singleton
+* prototype
+* request
+* session
+* global session
+
+## Spring 中的常用注解
+
+### @Configuration, @Component, @Controller, @Service, @Repository 有何区别
+
+### @Autowried的作用是什么，@Qualifier的作用是什么
 
 ### @Autowried和@Resource的区别
 
-### Spring中使用了哪些设计模式
+### @RequestMapping的作用是什么，如何工作的
+
+## Spring 自动装配
+
+### 自动装配如何实现
+
+### 有哪几种方式
+
+## WebApplicationContext
+
+## Spring中使用了哪些设计模式
 
 * 单例模式
 * 工厂模式
 * 观察者模式
-
-## Spring Boot
-
-### Spring boot 的启动流程
-
-### Spring boot 的自动装配
-
-## Spring Cloud
-
-## Spring Cloud Alibaba

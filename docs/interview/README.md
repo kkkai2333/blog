@@ -5,44 +5,25 @@
 
 ***
 
-## Java
-
-## JVM
-
-## Spring Framework
-
-## Spring Boot
-
-## Spring Cloud netflix
-
-## Spring Cloud Alibaba
-
-## Mybatis
-
-## MySQL
-
-## Redis
-
-## Dubbo
-
-## Zookeeper
-
-## MongoDB
-
-## RabbitMQ/RocketMQ/kafka
-
-## Elasticsearch
-
-## TCP/UDP/NIO
-
-## 分库分表
-
-## 设计模式
-
-## 排序算法
-
-## 经典数据结构
-
-## Linux常用命令
-
-## 算法
+* Java
+* JVM
+* Spring Framework
+* Spring Boot
+* Spring Cloud Netflix
+* Spring Cloud Alibaba
+* Mybatis
+* MySQL
+* Redis
+* RabbitMQ/RocketMQ/kafka
+* Dubbo
+* Zookeeper
+* MongoDB
+* Elasticsearch
+* TCP/UDP/NIO
+* 分库分表
+* 设计模式
+* 排序算法
+* 经典数据结构
+* Linux常用命令
+* 算法
+* ...
