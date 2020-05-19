@@ -45,7 +45,6 @@ const javaArr = [
 const springArr = [
     "spring-ioc",
     "spring-aop",
-    "spring-di",
     "spring-annotation",
     "spring-transaction",
     "spring-design-patterns",

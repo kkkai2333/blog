@@ -1,8 +1,14 @@
 # Spring 专题
 
-## Spring 是什么
+## 问题
 
-## 什么是Spring bean
+### Spring 是什么
+
+### spring、spring MVC、spring boot、spring cloud 分别是什么，有什么区别
+
+### 什么是Spring bean
+
+* 完成了 Spring 的生命周期的 Java 对象。
 
 ## Spring bean 有几种scope
 
@@ -14,20 +20,8 @@
 * session
 * global session
 
-## Spring 依赖注入
-
-## Spring 自动装配
-
-### 自动装配如何实现
-
-### 有哪几种方式
-
 ## WebApplicationContext
 
-## Spring中使用了哪些设计模式
+## 扩展
 
-* 单例模式
-* 工厂模式
-* 观察者模式
-* 模板方法模式
-* 
+### Servlet 规范

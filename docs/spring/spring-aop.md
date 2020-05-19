@@ -1,5 +1,7 @@
 # Spring Aop
 
+## 问题
+
 ### 什么是 AOP
 
 ### Aspect又是什么
@@ -28,30 +30,32 @@
 * @After
 * @Around
 
-## spring 是如何完成aop的
+### spring 是如何完成aop的
 
-## jdk proxy 和 cglib 在代理上有什么区别
+## 源码分析
 
-1. proxy 只能代理接口。
-2. cglib 会默认生成一个代理类的子类，所以可以代理Java类，但是这要求被代理的类不能是final的。
+### AopProxy
 
-## AopProxy
+#### JdkDynamicAopProxy
 
-### JdkDynamicAopProxy
+#### CglibAopProxy
 
-### CglibAopProxy
+### AopProxyFactory
 
-## AopProxyFactory
+### DefaultAopProxyFactory
 
-## DefaultAopProxyFactory
-
-## AbstractAutoProxyCreator
+### AbstractAutoProxyCreator
 
 spring aop定义的一个后置处理器，在spring 生命周期中，调用beanPostProcessor的after方法时，会调用这个后置处理器。
 
-## AopAutoConfiguration
+### AopAutoConfiguration
 
 spring boot 中，aop的自动配置类。
+
+### jdk proxy 和 cglib 在代理上有什么区别
+
+1. proxy 只能代理接口。
+2. cglib 会默认生成一个代理类的子类，所以可以代理Java类，但是这要求被代理的类不能是final的。
 
 ## 扩展
 
