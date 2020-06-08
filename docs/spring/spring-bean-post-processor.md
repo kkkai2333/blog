@@ -20,6 +20,8 @@
 
 **ImportBeanDefinitionRegistrar**
 
+**ConfigurationClassPostProcessor**
+
 **三种spring bean 生命周期中出现的Aware**
 
 ![Aware](./spring/Aware.png)

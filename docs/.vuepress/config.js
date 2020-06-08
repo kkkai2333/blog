@@ -1,6 +1,8 @@
+// emacs OneDrive/code/github/blog/docs/.vuepress/config.js
+
 const openArr = [
-    "how-to-build-redis-cluster",
-    "how-to-build-blog"
+    "how-to-build-blog",
+    "how-to-build-redis-cluster"
 ];
 
 const algorithmArr = [
@@ -27,19 +29,31 @@ const interviewArr = [
     "排序算法",
     "计算机网络",
     "经典数据结构",
-    "高并发系统设计"
+    "高并发系统设计",
+    "java-web"
     
 ];
 
 const javaArr = [
+    "collection",
+    "queue",
     "hashmap",
     "concurrent-hashmap",
-    "thread-pool-executor",
-    "ThreadLocal",
+    "proxy",
+    "lock",
+    "juc",
     "aqs",
     "ReentrantLock",
-    "ReadWriteLock",
-    "JVM"
+    "ReentrantReadWriteLock",
+    "StampedLock",
+    "atomic",
+    "thread-pool-executor",
+    "thread-local",
+    "jdk-sort",
+    "synchronized",
+    "volatile",
+    "jmm",
+    "jvm"
 ];
 
 const springArr = [
@@ -50,6 +64,7 @@ const springArr = [
     "spring-transaction",
     "spring-design-patterns",
     "spring-bean-post-processor",
+    "spring-bean-definition",
     "spring-bean-life-cycle",
     "spring-bean-circular-dependency",
     "Spring-mvc",
@@ -66,8 +81,10 @@ const springArr = [
 const redisArr = [
     "redis-data-type",
     "redis-data-structure",
-    "缓存三大问题",
-    "高可用方案"
+    "redis-persistence",
+    "redis-expire-delete",
+    "redis-enviction",
+    "redis-ha"
 ];
 
 const dbArr = [
@@ -99,7 +116,7 @@ module.exports = {
         }
     },
     themeConfig: {
-        // 你的 Git 项目地址，添加后会在导航栏的最后追加
+        // Git项目地址，添加后会在导航栏的最后追加
         repo: 'itForeverYoung/blog',
         // 启用编辑
         editLinks: true,

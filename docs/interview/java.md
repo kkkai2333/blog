@@ -1,5 +1,9 @@
 # Java 篇
 
+首先，看一下Java的知识图谱。
+
+![java](../java/java/java.jpg)
+
 ## 基础
 
 1. Object有哪些方法？
@@ -29,7 +33,7 @@
 6. Java 中的 TreeMap 是采用什么树实现的？ 
 7. 说一下 HashMap 的实现原理？ 扩容机制了解吗？为什么说它不是线程安全的？如果要线程安全应该用什么？
 8. 说一下 ConcurrentHashMap 的实现原理？
-9. 说一下 HashSet 的实现原理？ 它是如何检查重复的？
+9. 说一下 HashSet 的实现原理？它和 HashMap 有什么区别？它是如何检查重复的？
 10. ArrayList 和 LinkedList 的区别是什么？ 
 11. 如何实现数组和 List 之间的转换？ 
 12. ArrayList 和 Vector 的区别是什么？ 
@@ -49,30 +53,29 @@
 4. Thread的run()和start()方法有什么区别？
 5. 为什么我们调用start()方法时会执行run()方法，为什么我们不能直接调用run()方法？ 
 6. 有哪些办法可以让一个线程阻塞？
-7. 如何 唤醒一个阻塞的线程？
+7. Java中你怎样唤醒一个阻塞的线程？ 
 8. 在java中wait()和sleep()方法的不同？ 
 9. 为什么wait()方法和notify()/notifyAll()方法要在同步块中被调用 ？
 10. 现在有T1、T2、T3三个线程，你怎样保证T2在T1执行完后执行，T3在T2执行完后执行？ 
-11. 用Java实现阻塞队列。 
+11. 用Java实现一个阻塞队列
 12. ThreadLocal 有用过吗？他是如何实现同一个线程共享变量的？子线程能拿到父线程设置的值吗？如果我想拿到该怎么做？
 13. volatile 了解吗？它线程安全吗？为什么不安全？为什么不能保证原子性？它是如何保证可见性、有序性的？
-14. synchronized 了解吗？在方法上、代码块内、静态变量上加synchronized有什么区别？底层是怎么实现的？jdk 1.6之后做了哪些锁优化？
+14. synchronized 了解吗？在方法上、代码块内、静态变量上加 synchronized 有什么区别？底层是怎么实现的？jdk 1.6之后做了哪些锁优化？
 15. 使用 synchronized 如何实现单缓冲区的生产者消费者模型？
-16. synchronized 和 ReentrantLock 有什么区别？
-17. 说一下 ReentrantLock 的实现原理？它是公平锁吗？是可重入锁吗？
-18. 在Java中Lock接口比synchronized块的优势是什么？
-19. 你需要实现一个高效的缓存，它允许多个用户读，但只允许一个用户写，以此来保持它的完整性，你会怎样去实现它？ 
-20. 说一下 ReadWriteLock 的实现原理？
-21. 什么是CAS？什么是ABA问题？
-22. FutureTask是什么？
-23. Java中有哪几种锁？
+16. Java中有哪几种锁？
+17. synchronized 和 ReentrantLock 有什么区别？
+18. [说一下 ReentrantLock 的实现原理？它是公平锁吗？可重入吗？](../java/ReentrantLock.md)
+19. 在Java中，Lock接口相比于synchronized，优势是什么？
+20. 你需要实现一个高效的缓存，它允许多个用户读，但只允许一个用户写，以此来保持它的完整性，你会怎样去实现它？ 
+21. [说一下 ReentrantReadWriteLock 的实现原理？它是公平锁吗？可重入吗？](../java/ReentrantReadWriteLock.md)
+22. 什么是CAS？什么是ABA问题？
+23. FutureTask是什么？
 24. 为什么会发生死锁，你能制造一个死锁吗？
 25. 什么是原子操作，Java中的原子操作是什么？ 
 26. 什么是竞争条件？你怎样发现和解决竞争？ 
-27. Java中你怎样唤醒一个阻塞的线程？ 
-28. CycliBarriar和CountdownLatch有什么区别？ 
-29. 什么是不可变对象，它对写并发应用有什么帮助？ 
-30. 你在多线程环境中遇到的共同的问题是什么？你是怎么解决它的？ 
+27. CycliBarriar和CountdownLatch有什么区别？ 
+28. 什么是不可变对象，它对写并发应用有什么帮助？ 
+29. 你在多线程环境中遇到的问题是什么？你是怎么解决它的？ 
 
 ## 其他
 

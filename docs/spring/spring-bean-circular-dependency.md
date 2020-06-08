@@ -206,14 +206,6 @@ public Object getSingleton(String beanName) {
 		return getSingleton(beanName, true);
 	}
 
-	/**
-	 * Return the (raw) singleton object registered under the given name.
-	 * <p>Checks already instantiated singletons and also allows for an early
-	 * reference to a currently created singleton (resolving a circular reference).
-	 * @param beanName the name of the bean to look for
-	 * @param allowEarlyReference whether early references should be created or not
-	 * @return the registered singleton object, or {@code null} if none found
-	 */
 	@Nullable
 	protected Object getSingleton(String beanName, boolean allowEarlyReference) {
     // 首先，从单例池中获取该bean，如果获取到（代表该bean已经完成了初始化），就直接返回
@@ -338,19 +330,20 @@ protected void populateBean(String beanName, RootBeanDefinition mbd, @Nullable B
 		}
 
 		PropertyValues pvs = (mbd.hasPropertyValues() ? mbd.getPropertyValues() : null);
-		// 这里我们可以看到，从BeanDefinition的实例中获取了当前bean的@Autowired的注入模式
-  	// @Autowired的注入模式有4种
+		// 这里我们可以看到，从BeanDefinition的实例中获取了当前bean的自动注入模式
+  	// 自动注入模式有4种
     // 1. AUTOWIRE_NO, 2. AUTOWIRE_BY_NAME, 3. AUTOWIRE_BY_TYPE 4. AUTOWIRE_CONSTRUCTOR
-  	// AUTOWIRE_BY_NAME，很简单，其实根据name去调用doGetBean方法
 		int resolvedAutowireMode = mbd.getResolvedAutowireMode();
 		if (resolvedAutowireMode == AUTOWIRE_BY_NAME || resolvedAutowireMode == AUTOWIRE_BY_TYPE) {
 			MutablePropertyValues newPvs = new MutablePropertyValues(pvs);
 			// Add property values based on autowire by name if applicable.
 			if (resolvedAutowireMode == AUTOWIRE_BY_NAME) {
+        // AUTOWIRE_BY_NAME，很简单，其实根据name去调用doGetBean方法
 				autowireByName(beanName, mbd, bw, newPvs);
 			}
 			// Add property values based on autowire by type if applicable.
 			if (resolvedAutowireMode == AUTOWIRE_BY_TYPE) {
+        // AUTOWIRE_BY_TYPE
 				autowireByType(beanName, mbd, bw, newPvs);
 			}
 			pvs = newPvs;
@@ -364,11 +357,11 @@ protected void populateBean(String beanName, RootBeanDefinition mbd, @Nullable B
 			if (pvs == null) {
 				pvs = mbd.getPropertyValues();
 			}
-      // 如果没有指定@Autowired的类型，代码会执行到这里，
+      // 如果没有指定自动注入的模式，那就是默认为no，即不开启自动注入，代码会执行到这里，
       // 这里也调用了一次后置处理器，这段代码，我们可以先主要关注两个BeanProcessor的实现类
       // CommonAnnotationBeanPostProcessor（这个，其实是spring对@Resources注解的处理类）
-      // AutowiredAnnotationBeanPostProcessor（这个，就是spring对无类型的@Autowired的处理）
-      // 当AutowiredAnnotationBeanPostProcessor去执行postProcessPropertyValues时，会去初始化对应的属性，然后就会调用getBean()去获取依赖的bean。
+      // AutowiredAnnotationBeanPostProcessor（这个，就是spring对无类型的@Autowired的处理类）
+      // 在"spring 依赖注入"一文中，详细分析了这个后置处理器
 			for (BeanPostProcessor bp : getBeanPostProcessors()) {
 				if (bp instanceof InstantiationAwareBeanPostProcessor) {
 					InstantiationAwareBeanPostProcessor ibp = (InstantiationAwareBeanPostProcessor) bp;

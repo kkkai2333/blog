@@ -16,7 +16,7 @@
 
 ### DispatcherServlet的工作流程
 
-**首先，spring MVC是通过DispatcherServlet来处理请求的，那就先简单看下DispatcherServlet处理请求的流程。**
+**首先，Spring MVC是通过DispatcherServlet来处理请求的，那就先简单看下DispatcherServlet处理请求的流程。**
 
 ![Spring-MVC-process-request](./spring/Spring-MVC-process-request.jpg)
 
