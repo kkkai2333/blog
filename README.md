@@ -1,1 +1,1 @@
-# My Blog
+# stay hungry, stay foolish.
