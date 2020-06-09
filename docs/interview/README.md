@@ -20,6 +20,7 @@
 * Java
 * JVM
 * Spring Framework
+* Spring Web
 * Spring Boot
 * Spring Cloud Netflix
 * Spring Cloud Alibaba
@@ -28,10 +29,10 @@
 * Redis
 * Dubbo
 * Zookeeper
-* MQ
 * Elasticsearch
+* MQ
+* IO
 * MongoDB
-* TCP/UDP/NIO
 * 分库分表
 * 设计模式
 * 排序算法

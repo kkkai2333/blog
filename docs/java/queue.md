@@ -10,7 +10,7 @@
 
 ![Queue](./java/queue.png)
 
-#### PriorityQueue
+#### java.util.PriorityQueue
 
 #### java.util.concurrent.ConcurrentLinkedQueue
 

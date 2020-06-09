@@ -16,14 +16,14 @@ const interviewArr = [
     "mybatis",
     "mysql",
     "redis",
-    "mq",
-    "io",
     "dubbo",
     "zookeeper",
-    "mongodb",
     "elastic-search",
-    "linux",
+    "mq",
+    "io",
+    "mongodb",
     "docker",
+    "linux",
     "分库分表",
     "设计模式",
     "排序算法",
@@ -46,6 +46,9 @@ const javaArr = [
     "ReentrantLock",
     "ReentrantReadWriteLock",
     "StampedLock",
+    "CountDownLatch",
+    "CyclicBarrier",
+    "Semaphore",
     "atomic",
     "thread-pool-executor",
     "thread-local",
@@ -150,16 +153,16 @@ module.exports = {
                 text: "消息中间件",
                 link: "/mq/"
             },
+            {
+                text: "算法",
+                link: "/algorithm/"
+            },
             **/
             {
                 text: "面试专题",
                 link: "/interview/"
             },
             /**
-            {
-                text: "算法",
-                link: "/algorithm/"
-            },
             {
                 text: "分享",
                 link: "/open/"
@@ -222,18 +225,18 @@ module.exports = {
                     children: mqArr
                 }
             ],
-            '/interview/': [
-                {
-                    title: "面试专题",
-                    collapsable: false,
-                    children: interviewArr
-                }
-            ],
             '/algorithm/': [
                 {
                     title: "算法专题",
                     collapsable: false,
                     children: algorithmArr
+                }
+            ],
+            '/interview/': [
+                {
+                    title: "面试专题",
+                    collapsable: false,
+                    children: interviewArr
                 }
             ],
             '/open/': [

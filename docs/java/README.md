@@ -8,6 +8,8 @@
 
 ### transient
 
+被transient修饰的属性不会被序列化。
+
 ### [volatile](./volatile.md)
 
 ## 其他
@@ -30,25 +32,6 @@
 4. zgc 对 macos、windows 的支持
 
 ### JNI(Java native interface，Java本地接口)
-
-### Object类有哪些方法
-
-#### native 方法
-
-* getClass()
-* hashCode()
-* clone()
-* notify()
-* notifyAll()
-* wait(long)
-
-#### Java 方法
-
-* equals()
-* toString()
-* wait()
-* wait(long, int)
-* finalize()
 
 ## Java 知识图谱
 
