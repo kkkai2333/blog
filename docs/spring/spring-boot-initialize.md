@@ -210,7 +210,7 @@
    	}
    // 到这里，就能回答的第二个猜测了，spring boot如何启动spring容器的？
    // 调用AbstractApplicationContext的refresh()方法，来初始化spring容器的。
-   // 这个类是不是有点耳熟，没错，在分析spring的声明周期的时候，就分析过这个类，这个类就是spring容器启动最核心的类之一。
+   // 这个类是不是有点耳熟，没错，在分析spring的生命周期的时候，就分析过这个类，这个类就是spring容器启动最核心的类之一。
    // 看下图(1)，我用简单（其实不简单，因为第一次画。-_-）画了一个AbstractApplicationContext这个类的实现和继承树。
    protected void refresh(ApplicationContext applicationContext) {
        // 执行到这一步，applicationContext必须是AbstractApplicationContext的对象或者其子类对象，否则，会报错
@@ -460,7 +460,7 @@
     		// 这里省略了一下无关代码
         ...
     	}
-      // 再回到上文，当Tomcat初始化完成后，调用getTomcatWebServer()方法得到一个TomcatWebServer，其实这里也就是将Tomcat实例包装一下，包装成spring boot应用定义的webServer实现，以此通过spring控制tomcat的声明周期。
+      // 再回到上文，当Tomcat初始化完成后，调用getTomcatWebServer()方法得到一个TomcatWebServer，其实这里也就是将Tomcat实例包装一下，包装成spring boot应用定义的webServer实现，以此通过spring控制tomcat的生命周期。
       protected TomcatWebServer getTomcatWebServer(Tomcat tomcat) {
         return new TomcatWebServer(tomcat, getPort() >= 0);
       }
@@ -555,4 +555,4 @@
 
 ![Spring boot 启动流程](./spring/spring-boot-initialized.jpg)
 
-OK，那本期面试题解答就到这里了，欢迎各位大佬多提宝贵意见，我们下期再见。
+OK，那本篇文章就到这里了，欢迎各位大佬多提宝贵意见，我们下期再见。

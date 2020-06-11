@@ -2,7 +2,7 @@
 
 const openArr = [
     "how-to-build-blog",
-    "how-to-build-redis-cluster"
+    // "how-to-build-redis-cluster"
 ];
 
 const algorithmArr = [
@@ -13,94 +13,97 @@ const interviewArr = [
     "java",
     "jvm",
     "spring",
-    "mybatis",
+    //"mybatis",
     "mysql",
     "redis",
-    "dubbo",
-    "zookeeper",
-    "elastic-search",
-    "mq",
-    "io",
-    "mongodb",
-    "docker",
-    "linux",
-    "分库分表",
-    "设计模式",
-    "排序算法",
-    "计算机网络",
-    "经典数据结构",
-    "高并发系统设计",
-    "java-web"
+    //"dubbo",
+    //"zookeeper",
+    //"elastic-search",
+    //"mq",
+    //"io",
+    //"mongodb",
+    //"docker",
+    //"linux",
+    //"分库分表",
+    //"设计模式",
+    //"排序算法",
+    //"计算机网络",
+    //"经典数据结构",
+    //"高并发系统设计",
+    //"java-web"
     
 ];
 
 const javaArr = [
-    "collection",
-    "queue",
-    "hashmap",
-    "concurrent-hashmap",
-    "proxy",
-    "lock",
+    //"collection",
+    //"queue",
+    //"hashmap",
+    //"concurrent-hashmap",
+    //"proxy",
+    //"lock",
     "juc",
     "aqs",
     "ReentrantLock",
     "ReentrantReadWriteLock",
-    "StampedLock",
+    //"StampedLock",
     "CountDownLatch",
     "CyclicBarrier",
     "Semaphore",
-    "atomic",
-    "thread-pool-executor",
-    "thread-local",
-    "jdk-sort",
-    "synchronized",
-    "volatile",
-    "jmm",
-    "jvm"
+    //"atomic",
+    //"thread-pool-executor",
+    //"thread-local",
+    //"jdk-sort",
+    //"synchronized",
+    //"volatile",
+    //"jmm"
+];
+
+const jvmArr = [
+    //"jvm"
 ];
 
 const springArr = [
-    "spring-ioc",
-    "spring-aop",
+    //"spring-ioc",
+    //"spring-aop",
     "spring-di",
-    "spring-annotation",
-    "spring-transaction",
-    "spring-design-patterns",
-    "spring-bean-post-processor",
-    "spring-bean-definition",
-    "spring-bean-life-cycle",
+    //"spring-annotation",
+    //"spring-transaction",
+    //"spring-design-patterns",
+    //"spring-bean-post-processor",
+    //"spring-bean-definition",
+    //"spring-bean-life-cycle",
     "spring-bean-circular-dependency",
-    "Spring-mvc",
-    "Spring-boot",
+    //"Spring-mvc",
+    //"Spring-boot",
     "spring-boot-initialize",
-    "spring-boot-automatic-assembly",
-    "Spring-cloud",
-    "mybatis",
-    "tomcat",
-    "dubbo",
-    "zookeeper"
+    //"spring-boot-automatic-assembly",
+    //"Spring-cloud",
+    //"mybatis",
+    //"tomcat",
+    //"dubbo",
+    //"zookeeper"
 ];
 
 const redisArr = [
-    "redis-data-type",
+    //"redis-data-type",
     "redis-data-structure",
-    "redis-persistence",
-    "redis-expire-delete",
-    "redis-enviction",
-    "redis-ha"
+    //"redis-persistence",
+    //"redis-expire-delete",
+    //"redis-enviction",
+    //"redis-ha"
 ];
 
 const dbArr = [
     "MySQL",
-    "MyCat",
-    "ShardingSphere",
-    "MongoDB",
+    //"MyCat",
+    //"ShardingSphere",
+    //"MongoDB",
 ]
 
 const mqArr = [
-    "rabbitmq",
-    "rocketmq",
-    "kafka"
+    //"rabbitmq",
+    //"rocketmq",
+    //"kafka"
 ]
 
 module.exports = {
@@ -132,10 +135,13 @@ module.exports = {
         lastUpdated: '上次更新时间',
         // 这里定义的是导航栏
         nav: [
-            /**
             {
                 text: "Java",
                 link: "/java/"
+            },
+            {
+                text: "JVM",
+                link: "/jvm/"
             },
             {
                 text: "Spring",
@@ -145,29 +151,30 @@ module.exports = {
                 text: "Redis",
                 link: "/redis/"
             },
+            /**
             {
                 text: "数据库",
                 link: "/db/"
             },
+            
             {
                 text: "消息中间件",
                 link: "/mq/"
             },
+            
             {
                 text: "算法",
                 link: "/algorithm/"
             },
-            **/
+            */
             {
                 text: "面试专题",
                 link: "/interview/"
-            },
-            /**
+            }, 
             {
-                text: "分享",
+                text: "随便分享",
                 link: "/open/"
             },
-            **/
             /*
             {
                 text: "404",
@@ -195,6 +202,13 @@ module.exports = {
                     title: "Java专题",
                     collapsable: false,
                     children: javaArr
+                }
+            ],
+            '/jvm/': [
+                {
+                    title: "JVM专题",
+                    collapsable: false,
+                    children: jvmArr
                 }
             ],
             '/spring/': [

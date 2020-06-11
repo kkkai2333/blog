@@ -465,6 +465,30 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 
 这里需要注意，sdshdr5和其他四种类型不同，它没有alloc字段，并且它的len是通过flags的高5位来存储的。这就说明，它没有剩余空间，所以，如果字符串需要增长，就需要重新分配内存。由此可见，这种类型比较适合存储静态的短字符串（长度小于32）。
 
+## ziplist
+
+### 定义
+
+### 源码分析
+
+## quicklist
+
+### 定义
+
+### 源码分析
+
+## skiplist
+
+### 定义
+
+### 源码分析
+
+## intset
+
+### 定义
+
+### 源码分析
+
 ## robj
 
 ### 定义
@@ -499,26 +523,3 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 #define OBJ_ENCODING_STREAM 10 /* Encoded as a radix tree of listpacks */
 ```
 
-## ziplist
-
-### 定义
-
-### 源码分析
-
-## quicklist
-
-### 定义
-
-### 源码分析
-
-## skiplist
-
-### 定义
-
-### 源码分析
-
-## intset
-
-### 定义
-
-### 源码分析

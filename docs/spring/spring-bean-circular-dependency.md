@@ -400,4 +400,4 @@ protected void populateBean(String beanName, RootBeanDefinition mbd, @Nullable B
 
 ![spring-bean-circular-dependency](./spring/spring-bean-circular-dependency.jpg)
 
-OK，那本期面试题解答就到这里了，欢迎各位大佬多提宝贵意见，我们下期再见。
+OK，那本篇文章就到这里了，欢迎各位大佬多提宝贵意见，我们下期再见。
