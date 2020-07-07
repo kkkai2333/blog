@@ -220,7 +220,7 @@
    	}
    ```
 
-   ![AnnotationConfigServletWebServerApplicationContext](./spring/ApplicationContext-structure.jpg)
+   ![AnnotationConfigServletWebServerApplicationContext](./img/spring/ApplicationContext-structure.jpg)
 
    <center>图(1)</center>
 
@@ -320,7 +320,7 @@
 
 13. 下面，就来看下web服务器是如何创建和启动的，先放一张图(2)，简单看一下。
 
-    ![Spring-Boot-WebServer](./spring/Spring-Boot-WebServer.jpg)
+    ![Spring-Boot-WebServer](./img/spring/Spring-Boot-WebServer.jpg)
 
     <center>图(2)</center>
 
@@ -382,7 +382,7 @@
 
 17. 在这里，先简单描述下Tomcat各个组件之间的关系，详细见下图(3)。
 
-    ![Tomcat组件图](./tomcat/Tomcat-Components.jpg)
+    ![Tomcat组件图](./img/tomcat/Tomcat-Components.jpg)
 
     ```java
       // 
@@ -534,7 +534,7 @@
 
 19. 那么，最后，再看下通过idea生成的TomcatServletWebServerFactory的类图，其实就单论WebServerFactory类的实现这一块，就很复杂，Spring boot为了支持多种内嵌web服务器，也是很好地遵守了对扩展开放，对修改关闭的设计原则，以后有时间，也可以专门写一篇文章分析下这块。
 
-    ![TomcatServletWebServerFactory](./spring/TomcatServletWebServerFactory.png)
+    ![TomcatServletWebServerFactory](./img/spring/TomcatServletWebServerFactory.png)
 
 ## 总结
 
@@ -553,6 +553,6 @@
 
 那么最后就以一张图来总结下spring boot的启动流程吧。
 
-![Spring boot 启动流程](./spring/spring-boot-initialized.jpg)
+![Spring boot 启动流程](./img/spring/spring-boot-initialized.jpg)
 
 OK，那本篇文章就到这里了，欢迎各位大佬多提宝贵意见，我们下期再见。

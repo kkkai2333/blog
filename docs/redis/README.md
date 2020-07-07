@@ -2,7 +2,7 @@
 
 首先，看一下Redis的知识图谱。
 
-![Redis知识图谱](./redis/redis.jpg)
+![Redis知识图谱](./img/redis.jpg)
 
 ## Redis是什么
 

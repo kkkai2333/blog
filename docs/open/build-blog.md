@@ -4,13 +4,13 @@
 
 其实早就想搞一个blog玩一玩，但是苦于没有时间。~~归根结底就是懒，10/6/5有脸说自己没时间？~~
 
-<img width="100" height="100" src="./blog/blackQuestion.jpg" />
+<img width="100" height="100" src="./img/black-question.jpg" />
 
 最近由于某四自建站搭blog的鞭策，百忙之中（~~上班摸鱼~~）搭出来这个简单的blog。
 
 **虽然简单，但是，相比自建站来说，不花钱，难道它不香吗？**
 
-<img width="100" height="100" src="./blog/realFragrant.jpg" />
+<img width="100" height="100" src="./img/real-fragrant.jpg"/>
 
 那第一篇具有纪念意义的blog，当然是写一下搭blog时踩的那些坑了。虽然这种帖子满大街都是，但是对我来说，还是有几个小坑的，所以，就勉强拿来练笔了。
 
