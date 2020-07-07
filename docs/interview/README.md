@@ -7,7 +7,7 @@
 
 **持续更新中……**
 
-![learning](./learn/learning-route.jpg)
+![learning](./img/learn/learning-route.jpg)
 
 * Java
 * JVM

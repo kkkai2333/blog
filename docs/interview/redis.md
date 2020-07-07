@@ -2,7 +2,7 @@
 
 首先，看一下Redis的知识图谱。
 
-![redis](../redis/redis/redis.jpg)
+![redis](../redis/img/redis.jpg)
 
 ## 面试问题连环炮
 

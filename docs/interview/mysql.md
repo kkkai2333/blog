@@ -2,7 +2,7 @@
 
 首先，看一下MySQL的知识图谱。
 
-![mysql](../db/mysql/mysql.jpg)
+![mysql](../db/img/mysql/mysql.jpg)
 
 ## 面试问题连环炮
 

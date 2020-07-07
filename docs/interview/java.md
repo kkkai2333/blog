@@ -2,7 +2,7 @@
 
 首先，看一下Java的知识图谱。
 
-![java](../java/java/java.jpg)
+![java](../java/img/java.jpg)
 
 ## 基础
 
