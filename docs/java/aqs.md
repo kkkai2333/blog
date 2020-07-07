@@ -10,7 +10,7 @@
 
 先看下AQS类的类图。
 
-![AQS](./java/aqs.png)
+![AQS](./img/aqs.png)
 
 AQS类继承了AbstractOwnableSynchronizer类，而AbstractOwnableSynchronizer类比较简单，只维护了一个exclusiveOwnerThread变量，保存当前持有独占锁的线程，并提供了set/get方法。
 

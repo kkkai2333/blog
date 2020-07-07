@@ -30,7 +30,7 @@ cas + synchronized，数组 + 链表/红黑树；
 
 #### TreeMap
 
-TreeMap实现了SortedMap。
+TreeMap实现了SortedMap；
 
 #### Hashtable
 
@@ -40,7 +40,7 @@ TreeMap实现了SortedMap。
 
 #### TreeSet
 
-TreeSet实现了SortedSet。
+TreeSet实现了SortedSet；
 
 ### List
 

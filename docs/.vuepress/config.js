@@ -1,8 +1,7 @@
 // emacs OneDrive/code/github/blog/docs/.vuepress/config.js
 
 const openArr = [
-    "how-to-build-blog",
-    // "how-to-build-redis-cluster"
+    "build-blog"
 ];
 
 const algorithmArr = [
@@ -13,7 +12,7 @@ const interviewArr = [
     "java",
     "jvm",
     "spring",
-    //"mybatis",
+    "mybatis",
     "mysql",
     "redis",
     //"dubbo",
@@ -35,10 +34,10 @@ const interviewArr = [
 ];
 
 const javaArr = [
-    //"collection",
-    //"queue",
-    //"hashmap",
-    //"concurrent-hashmap",
+    "collection",
+    "queue",
+    "hashmap",
+    "concurrent-hashmap",
     //"proxy",
     //"lock",
     "juc",
@@ -49,8 +48,8 @@ const javaArr = [
     "CountDownLatch",
     "CyclicBarrier",
     "Semaphore",
-    //"atomic",
-    //"thread-pool-executor",
+    "atomic",
+    "thread-pool-executor",
     //"thread-local",
     //"jdk-sort",
     //"synchronized",
@@ -63,41 +62,41 @@ const jvmArr = [
 ];
 
 const springArr = [
-    //"spring-ioc",
-    //"spring-aop",
+    "spring-ioc",
+    "spring-aop",
     "spring-di",
     //"spring-annotation",
-    //"spring-transaction",
+    "spring-transaction",
     //"spring-design-patterns",
-    //"spring-bean-post-processor",
-    //"spring-bean-definition",
-    //"spring-bean-life-cycle",
+    "spring-bean-definition",
+    "spring-bean-life-cycle",
+    "spring-bean-post-processor",
     "spring-bean-circular-dependency",
-    //"Spring-mvc",
-    //"Spring-boot",
+    "spring-mvc",
+    //"spring-boot",
     "spring-boot-initialize",
-    //"spring-boot-automatic-assembly",
-    //"Spring-cloud",
-    //"mybatis",
+    "spring-boot-automatic-assembly",
+    //"spring-cloud",
+    "mybatis",
     //"tomcat",
     //"dubbo",
     //"zookeeper"
 ];
 
 const redisArr = [
-    //"redis-data-type",
+    "redis-data-type",
     "redis-data-structure",
-    //"redis-persistence",
-    //"redis-expire-delete",
-    //"redis-enviction",
-    //"redis-ha"
+    "redis-persistence",
+    "redis-expire-delete",
+    "redis-enviction",
+    "redis-ha"
 ];
 
 const dbArr = [
-    "MySQL",
-    //"MyCat",
-    //"ShardingSphere",
-    //"MongoDB",
+    "mysql",
+    //"my-cat",
+    //"sharding-sphere",
+    //"mongodb",
 ]
 
 const mqArr = [

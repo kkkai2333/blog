@@ -2,7 +2,7 @@
 
 ## Java 知识图谱
 
-![java](./java/java.jpg)
+![java](./img/java.jpg)
 
 ## 新特性
 

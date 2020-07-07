@@ -71,7 +71,7 @@ typedef struct dict {
 
 根据代码中对dict的定义也可以看出，他持有两个dictht指针数组的引用，重哈希也就是先扩展ht[1]，然后再把数据从ht[0]迁移到ht[1]。
 
-2. 先看下dict的初始化函数，dict的初始化比较简单，ht[*].table都给了null，size、sizemask、used=0，dict的其他属性默认给了初始值。
+2. 再看下dict的初始化函数，dict的初始化比较简单，ht[*].table都给了null，size、sizemask、used=0，dict的其他属性默认给了初始值。
 
 ```c
 /* Create a new hash table */

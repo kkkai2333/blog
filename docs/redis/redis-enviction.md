@@ -1,24 +1,29 @@
 # Redis 内存逐出策略
 
-## 源码分析
+## 基础
+
+### 配置文件
 
 ```json
 // redis.conf
-// 设置为0代表没有内存限制
+// 配置可使用的内存上限，设置为0代表没有内存限制
 maxmemory 100mb
-// 配置内存淘汰策略
+// 配置内存达到上限后，使用的逐出策略，默认是noeviction
 maxmemory-policy noeviction
+// lru内存逐出和最小过期超时的策略执行时，会通过抽样检测的方式，
+// samples配置就是每次逐出时选取的样本数量
 maxmemory-samples 5
 ```
 
-逐出算法有两大类：
+### 可选的逐出算法
 
-* LRU，最近最少使用逐出
-* LFU(Least Frequently Used, 4.0+)，最不常用逐出
+- noenviction（驱逐）：禁止驱逐数据，
 
-可选的逐出算法：
+- volatile-random：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰，
 
-- no-enviction（驱逐）：禁止驱逐数据，
+- allkeys-random：从数据集（server.db[i].dict）中任意选择数据淘汰，
+
+- volatile-ttl：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰，
 
   ***
 
@@ -26,23 +31,17 @@ maxmemory-samples 5
 
 - allkeys-lru：从数据集（server.db[i].dict）中的key使用lru算法淘汰，
 
-  ***
-
 - volatile-lfu：对所有设置了过期时间的key使用LFU算法进行淘汰，
 
-- allkeys-lfu：对所有key使用LFU算法进行淘汰，
+- allkeys-lfu：对所有key使用LFU算法进行淘汰。
 
-  ***
+**LRU，最近最少使用逐出**
 
-- volatile-ttl：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰，
-
-  ***
-
-- volatile-random：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰，
-
-- allkeys-random：从数据集（server.db[i].dict）中任意选择数据淘汰。
+**LFU(Least Frequently Used, 4.0+)，最不常用逐出**
 
 **注，volatile-lru、volatile-ttl、volatile-random在没有符合条件（即所有的key都没有设置过期时间）的key时，逐出行为和no-enviction一致。**
+
+## 源码分析
 
 ```c
 // evict.c

@@ -2,4 +2,5 @@
 
 ## JVM 知识图谱
 
-![jvm](./jvm/jvm.jpg)
+![jvm](./img/jvm.jpg)
+

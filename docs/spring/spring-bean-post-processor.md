@@ -5,8 +5,9 @@
 ## 问题
 
 1. 有哪些后置处理器？作用是什么？
-2. Spring有哪些扩展点？
-3. 如何基于后置处理器来扩展Spring功能？
+2. ConfigurationClassPostProcessor的作用是什么？
+3. Spring有哪些扩展点？
+4. 如何基于后置处理器来扩展Spring功能？
 
 ## 源码分析
 
@@ -14,7 +15,7 @@
 
 **BeanPostProcessor**
 
-![BeanPostProcessor](./spring/BeanPostProcessor.png)**BeanFactoryPostProcessor**
+![BeanPostProcessor](./img/spring/BeanPostProcessor.png)**BeanFactoryPostProcessor**
 
 **FactoryBean**
 
@@ -24,7 +25,7 @@
 
 **三种spring bean 生命周期中出现的Aware**
 
-![Aware](./spring/Aware.png)
+![Aware](./img/spring/Aware.png)
 
 **然后，理解两个单词的含义，本文会大量出现这两个单词，需要分清楚。**
 
@@ -75,6 +76,8 @@
    
    }
    ```
+
+ConfigurationClassPostProcessor
 
 AutowiredAnnotationBeanPostProcessor
 

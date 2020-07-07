@@ -12,7 +12,7 @@ CyclicBarrier 栅栏机制，可以用来实现，等到一组线程都到了之
 
 ```java
 public class CyclicBarrier {
-	// 静态内部类，只维护了一个broken的属性，
+	  // 静态内部类，只维护了一个broken的属性，
     // 当线程被中断或者异常执行时，会将broken设置为true
     private static class Generation {
         boolean broken = false;
@@ -67,7 +67,6 @@ public class CyclicBarrier {
      * 3. dowait()方法可响应中断；
      * 4. 如果当前代屏障被打破，会抛出BrokenBarrierException异常；
      * 5. 如果传入了超时时间，该方法也可在超时后抛出TimeoutException异常。
-     * 
      */
     private int dowait(boolean timed, long nanos)
         throws InterruptedException, BrokenBarrierException,

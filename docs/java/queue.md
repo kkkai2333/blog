@@ -8,7 +8,7 @@
 
 ### Queue
 
-![Queue](./java/queue.png)
+![Queue](./img/queue.png)
 
 #### java.util.PriorityQueue
 
@@ -26,7 +26,7 @@
 
 ###  Deque
 
-![Dueue](./java/deque.png)
+![Dueue](./img/deque.png)
 
 #### java.util.ArrayDeque
 

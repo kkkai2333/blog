@@ -2,17 +2,17 @@
 
 ## 基本数据类型
 
-* Binary-safe strings
-* Hashes
-* Lists
-* Sets
-* Sorted sets
-* Streams
+* string
+* hash
+* list
+* set
+* zset
+* streams
 
 ## 高级数据类型
 
-* bitmaps（位图）
+* pipeline
+* bitmap
 * HyperLogLogs
 * Pub/Sub
-* pipeline
-* geo
+* Geo
