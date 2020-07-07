@@ -398,6 +398,6 @@ protected void populateBean(String beanName, RootBeanDefinition mbd, @Nullable B
 
 最后，我们通过一张简单的图，来模拟循环依赖的两个bean的初始化过程。
 
-![spring-bean-circular-dependency](./spring/spring-bean-circular-dependency.jpg)
+![spring-bean-circular-dependency](./img/spring/spring-bean-circular-dependency.jpg)
 
 OK，那本篇文章就到这里了，欢迎各位大佬多提宝贵意见，我们下期再见。
