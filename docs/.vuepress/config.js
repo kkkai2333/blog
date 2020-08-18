@@ -34,10 +34,10 @@ const interviewArr = [
 ];
 
 const javaArr = [
-    "collection",
-    "queue",
-    "hashmap",
-    "concurrent-hashmap",
+    // "collection",
+    // "queue",
+    // "hashmap",
+    // "concurrent-hashmap",
     //"proxy",
     //"lock",
     "juc",
@@ -48,7 +48,7 @@ const javaArr = [
     "CountDownLatch",
     "CyclicBarrier",
     "Semaphore",
-    "atomic",
+    // "atomic",
     "thread-pool-executor",
     //"thread-local",
     //"jdk-sort",
@@ -62,34 +62,34 @@ const jvmArr = [
 ];
 
 const springArr = [
-    "spring-ioc",
-    "spring-aop",
+    // "spring-ioc",
+    // "spring-aop",
     "spring-di",
     //"spring-annotation",
-    "spring-transaction",
+    // "spring-transaction",
     //"spring-design-patterns",
-    "spring-bean-definition",
-    "spring-bean-life-cycle",
-    "spring-bean-post-processor",
+    // "spring-bean-definition",
+    // "spring-bean-life-cycle",
+    // "spring-bean-post-processor",
     "spring-bean-circular-dependency",
-    "spring-mvc",
+    // "spring-mvc",
     //"spring-boot",
     "spring-boot-initialize",
-    "spring-boot-automatic-assembly",
+    // "spring-boot-automatic-assembly",
     //"spring-cloud",
-    "mybatis",
+    // "mybatis",
     //"tomcat",
     //"dubbo",
     //"zookeeper"
 ];
 
 const redisArr = [
-    "redis-data-type",
-    "redis-data-structure",
-    "redis-persistence",
-    "redis-expire-delete",
-    "redis-enviction",
-    "redis-ha"
+    // "redis-data-type",
+    // "redis-data-structure",
+    // "redis-persistence",
+    // "redis-expire-delete",
+    // "redis-enviction",
+    // "redis-ha"
 ];
 
 const dbArr = [

@@ -1,11 +1,11 @@
 # Executor
 
-线程池也是并发编程中最常使用的技术之一，池化的目的，就是为了节约资源，提高效率，本文就简要分析下线程池的源码。
+线程池也是并发编程中最常使用的技术之一，池化的目的，就是为了节约资源，提高效率，本文就简要分析下线程池的实现原理。
 
 ## 问题
 
-1. 线程有几种状态。
-2. 如何初始化一个线程池，几个参数的意义是什么。
+1. 线程有几种状态？
+2. 如何初始化一个线程池，几个参数的意义是什么？
 
 ## 源码分析
 
@@ -1272,7 +1272,8 @@ private void handlePossibleCancellationInterrupt(int s) {
     //
     // Thread.interrupted();
 }
-/** 取消任务，有两种情况，
+/** 
+ * 取消任务，有两种情况，
  * mayInterruptIfRunning==true时，表示需要中断线程，task的执行状态NEW->INTERRUPTING->INTERRUPTED
  * mayInterruptIfRunning==false时，将task的执行状态设置为CANCELLED即可。
  */
