@@ -1,6 +1,6 @@
 # Java 专题
 
-## Java 知识图谱
+## 知识图谱
 
 ![java](./img/java.jpg)
 

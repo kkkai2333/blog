@@ -1,8 +1,6 @@
 # AbstractQueuedSynchronizer
 
-**AQS类时JUC并发包下最核心的类，么得之一。**
-
-## 问题
+**AQS类是JUC并发包下最核心的类，么得之一。**
 
 ## 源码分析
 

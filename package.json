@@ -24,5 +24,8 @@
   "homepage": "https://github.com/itForeverYoung/blog#readme",
   "dependencies": {
     "package.json": "2.0.1"
+  },
+  "devDependencies": {
+    "vuepress-theme-reco": "^1.5.7"
   }
 }

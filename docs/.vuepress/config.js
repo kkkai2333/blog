@@ -1,4 +1,4 @@
-// emacs OneDrive/code/github/blog/docs/.vuepress/config.js
+// emacs ~/OneDrive/code/github/blog/docs/.vuepress/config.js
 
 const openArr = [
     "build-blog"
@@ -15,11 +15,13 @@ const interviewArr = [
     "mybatis",
     "mysql",
     "redis",
-    //"dubbo",
-    //"zookeeper",
-    //"elastic-search",
-    //"mq",
+    "dubbo",
+    "zookeeper",
+    "netty",
+    "tomcat",
+    "mq",
     //"io",
+    //"elastic-search",
     //"mongodb",
     //"docker",
     //"linux",
@@ -34,13 +36,12 @@ const interviewArr = [
 ];
 
 const javaArr = [
-    // "collection",
-    // "queue",
-    // "hashmap",
-    // "concurrent-hashmap",
+    //"collection",
+    //"hashmap",
+    //"concurrent-hashmap",
+    "queue",
     //"proxy",
-    //"lock",
-    "juc",
+    //"juc",
     "aqs",
     "ReentrantLock",
     "ReentrantReadWriteLock",
@@ -48,66 +49,121 @@ const javaArr = [
     "CountDownLatch",
     "CyclicBarrier",
     "Semaphore",
-    // "atomic",
+    //"atomic",
     "thread-pool-executor",
     //"thread-local",
     //"jdk-sort",
+    //"jmm",
     //"synchronized",
     //"volatile",
-    //"jmm"
 ];
 
 const jvmArr = [
-    //"jvm"
+    "jvm",
+    //"class-loader"
 ];
 
 const springArr = [
-    // "spring-ioc",
-    // "spring-aop",
+    //"spring-ioc",
+    //"spring-aop",
     "spring-di",
     //"spring-annotation",
-    // "spring-transaction",
+    //"spring-transaction",
     //"spring-design-patterns",
-    // "spring-bean-definition",
-    // "spring-bean-life-cycle",
-    // "spring-bean-post-processor",
+    //"spring-bean-definition",
+    //"spring-bean-life-cycle",
+    //"spring-bean-post-processor",
     "spring-bean-circular-dependency",
-    // "spring-mvc",
+    //"spring-mvc",
     //"spring-boot",
     "spring-boot-initialize",
-    // "spring-boot-automatic-assembly",
+    //"spring-boot-automatic-assembly",
     //"spring-cloud",
-    // "mybatis",
-    //"tomcat",
-    //"dubbo",
-    //"zookeeper"
+
 ];
 
-const redisArr = [
-    // "redis-data-type",
-    // "redis-data-structure",
-    // "redis-persistence",
-    // "redis-expire-delete",
-    // "redis-enviction",
-    // "redis-ha"
-];
+const dubboArr = [
+    //"spi",
+    //"service-export",
+    //"reference-import",
+    //"proxy",
+    //"protocol",
+    //"cluster",
+    //"registry",
+    //"exchange",
+    //"transport",
+    //"serialization"
+]
+
+const mybatisArr = [
+
+]
+
+const nettyArr = [
+
+]
+
+const tomcatArr = [
+
+]
+
+const zkArr = [
+
+]
+
+const esArr = [
+
+]
 
 const dbArr = [
     "mysql",
-    //"my-cat",
-    //"sharding-sphere",
     //"mongodb",
 ]
 
+const mysqlArr = [
+    "mysql",
+    //"my-cat",
+    //"sharding-sphere",
+]
+
+const mongoArr = [
+
+]
+
+const hbaseArr = [
+
+]
+
+const redisArr = [
+    "redis-data-type",
+    "redis-data-structure",
+    "redis-persistence",
+    "redis-expire-delete",
+    "redis-enviction",
+    "redis-ha",
+];
+
 const mqArr = [
     //"rabbitmq",
-    //"rocketmq",
+    "rocketmq",
     //"kafka"
 ]
 
+const rabbitmqArr = [
+    "rabbitmq"
+]
+
+const rocketmqArr = [
+    "rocketmq"
+]
+
+const kafkaArr = [
+    "kafka"
+]
+
 module.exports = {
-    title: 'IT Forever Young',
-    description: 'IT Forever Young',
+    title: '孤帆远影碧空尽',
+    description: 'Hello World',
     base: "/",
     head: [
         ['link', { rel: 'icon', href: '/logo.png' }]
@@ -120,6 +176,7 @@ module.exports = {
             description: ""
         }
     },
+    theme: "reco",
     themeConfig: {
         // Git项目地址，添加后会在导航栏的最后追加
         repo: 'itForeverYoung/blog',
@@ -132,49 +189,130 @@ module.exports = {
         // 假如文档放在一个特定的分支下：
         // docsBranch: 'master',
         lastUpdated: '上次更新时间',
+        // type: 'blog', // 主题类型
+        subSidebar: "auto",
+        // 博客设置
+        /**
+        blogConfig: {
+            category: {
+                location: 2, // 在导航栏菜单中所占的位置，默认2
+                text: 'Category' // 默认 “分类”
+            },
+            tag: {
+                location: 3, // 在导航栏菜单中所占的位置，默认3
+                text: 'Tag' // 默认 “标签”
+            }
+        },
+        */
+        author: "鱼丸粗面",
+        // authorAvatar: 'logo.png', // 作者头像
+        mode: 'auto', // 默认auto
+        modePicker: true, // 默认true, 即可以切换模式
+        // 密钥
+        /**
+        keyPage: {
+            keys: ['e10adc3949ba59abbe56e057f20f883e'], // 1.3.0 版本后需要设置为密文
+            color: '#42b983', // 登录页动画球的颜色
+            lineColor: '#42b983' // 登录页动画线的颜色
+        },
+        */
         // 这里定义的是导航栏
         nav: [
+            { text: "主页", link: "/", icon: "reco-home"},
+            { text: '时间轴', link: '/timeline/', icon: 'reco-date'},
             {
                 text: "Java",
-                link: "/java/"
+                items: [
+                    {
+                        text: "Java",
+                        link: "/java/"
+                    },
+                    {
+                        text: "Jvm",
+                        link: "/jvm/"
+                    }
+                ]
             },
             {
-                text: "JVM",
-                link: "/jvm/"
+                text: "开源框架",
+                items: [
+                    {
+                        text: "Spring",
+                        link: "/spring/"
+                    },
+                    /**
+                    {
+                        text: "Mybatis",
+                        link: "/mybatis/"
+                    },
+                     */
+                    {
+                        text: "Dubbo",
+                        link: "/dubbo/"
+                    },
+                    /**
+                    {
+                        text: "Netty",
+                        link: "/netty/"
+                    },
+                    {
+                        text: "Tomcat",
+                        link: "/tomcat/"
+                    },
+                    {
+                        text: "Zookeeper",
+                        link: "/zk/"
+                    },
+                    {
+                        text: "ElasticSearch",
+                        link: "/es/"
+                    },
+                     */
+                ]
             },
-            {
-                text: "Spring",
-                link: "/spring/"
-            },
-            {
-                text: "Redis",
-                link: "/redis/"
-            },
-            /**
             {
                 text: "数据库",
-                link: "/db/"
+                items: [
+                    {
+                        text: "MySQL",
+                        link: "/db/mysql/"
+                    },
+                    {
+                        text: "Redis",
+                        link: "/redis/"
+                    },
+                    /**
+                    {
+                        text: "Hbase",
+                        link: "/db/hbase/"
+                    },
+                    {
+                        text: "MongoDB",
+                        link: "/db/mongodb/"
+                    },
+                     */
+                ]
             },
-            
             {
                 text: "消息中间件",
                 link: "/mq/"
             },
-            
+            /**
             {
-                text: "算法",
+                text: "算法专题",
                 link: "/algorithm/"
             },
             */
             {
                 text: "面试专题",
                 link: "/interview/"
-            }, 
+            },
+            /*
             {
                 text: "随便分享",
                 link: "/open/"
             },
-            /*
+            
             {
                 text: "404",
                 link: "https://www.google.com"
@@ -205,7 +343,7 @@ module.exports = {
             ],
             '/jvm/': [
                 {
-                    title: "JVM专题",
+                    title: "Jvm专题",
                     collapsable: false,
                     children: jvmArr
                 }
@@ -217,6 +355,45 @@ module.exports = {
                     children: springArr
                 }
             ],
+            // mybatis
+            '/dubbo/': [
+                {
+                    title: "Dubbo专题",
+                    collapsable: false,
+                    children: dubboArr
+                }
+            ],
+            '/netty/': [
+                {
+                    title: "Netty专题",
+                    collapsable: false,
+                    children: nettyArr
+                }
+            ],
+            '/tomcat/': [
+                {
+                    title: "Tomcat专题",
+                    collapsable: false,
+                    children: tomcatArr
+                }
+            ],
+            // zk
+            // es
+            '/db/mysql/': [
+                {
+                    title: "MySQL专题",
+                    collapsable: false,
+                    children: mysqlArr
+                }
+            ],
+            '/db/mongodb/': [
+                {
+                    title: "MongoDB专题",
+                    collapsable: false,
+                    children: mongoArr
+                }
+            ],
+            // hbase
             '/redis/': [
                 {
                     title: "Redis专题",
@@ -224,25 +401,11 @@ module.exports = {
                     children: redisArr
                 }
             ],
-            '/db/': [
-                {
-                    title: "数据库专题",
-                    collapsable: false,
-                    children: dbArr
-                }
-            ],
             '/mq/': [
                 {
                     title: "消息中间件专题",
                     collapsable: false,
                     children: mqArr
-                }
-            ],
-            '/algorithm/': [
-                {
-                    title: "算法专题",
-                    collapsable: false,
-                    children: algorithmArr
                 }
             ],
             '/interview/': [
@@ -261,7 +424,7 @@ module.exports = {
             ]
         },
         // 1: 提取到h2级别标题，2: 提取到h3级别标题
-        sidebarDepth: 1
+        // sidebarDepth: 1
     },
     markdown: {
         lineNumber: true

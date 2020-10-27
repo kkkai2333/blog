@@ -1,7 +1,5 @@
 # ReentrantLock
 
-## 问题
-
 ## 源码分析
 
 首先，ReentrantLock定义了一个内部抽象类Sync，Sync继承了[AQS](./aqs.md)类。

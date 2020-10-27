@@ -15,7 +15,7 @@
 
 **BeanPostProcessor**
 
-![BeanPostProcessor](./img/spring/BeanPostProcessor.png)**BeanFactoryPostProcessor**
+![BeanPostProcessor](./img/BeanPostProcessor.png)**BeanFactoryPostProcessor**
 
 **FactoryBean**
 
@@ -25,7 +25,7 @@
 
 **三种spring bean 生命周期中出现的Aware**
 
-![Aware](./img/spring/Aware.png)
+![Aware](./img/Aware.png)
 
 **然后，理解两个单词的含义，本文会大量出现这两个单词，需要分清楚。**
 
