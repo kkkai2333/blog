@@ -12,6 +12,7 @@ install:
   # - npm run build
   - npm ci # 找不到vuepress，所以重新install了一次
   - npm install -g vuepress
+  - npm install vuepress-theme-reco --save-dev
 
 script:
   # - . deploy.sh # 这里可以调用之前写好的deploy.sh文件进行发布
