@@ -1,12 +1,12 @@
 ---
-title: 基础
+title: MySQL 基础
 date: 2020-10-27
 categories:
 - mysql
 tags:
 - db
 - mysql
-sidebar: false
+sidebar: auto
 publish: true
 ---
 

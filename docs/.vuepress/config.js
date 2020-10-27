@@ -1,7 +1,7 @@
 // emacs ~/OneDrive/code/github/blog/docs/.vuepress/config.js
 
 const openArr = [
-    "build-blog"
+    //"build-blog"
 ];
 
 const algorithmArr = [
@@ -39,7 +39,7 @@ const javaArr = [
     //"collection",
     //"hashmap",
     //"concurrent-hashmap",
-    "queue",
+    //"queue",
     //"proxy",
     //"juc",
     "aqs",
@@ -115,11 +115,6 @@ const esArr = [
 
 ]
 
-const dbArr = [
-    "mysql",
-    //"mongodb",
-]
-
 const mysqlArr = [
     "mysql",
     //"my-cat",
@@ -135,30 +130,18 @@ const hbaseArr = [
 ]
 
 const redisArr = [
-    "redis-data-type",
-    "redis-data-structure",
-    "redis-persistence",
-    "redis-expire-delete",
-    "redis-enviction",
-    "redis-ha",
+    //"redis-data-type",
+    //"redis-data-structure",
+    //"redis-persistence",
+    //"redis-expire-delete",
+    //"redis-enviction",
+    //"redis-ha",
 ];
 
 const mqArr = [
     //"rabbitmq",
     "rocketmq",
     //"kafka"
-]
-
-const rabbitmqArr = [
-    "rabbitmq"
-]
-
-const rocketmqArr = [
-    "rocketmq"
-]
-
-const kafkaArr = [
-    "kafka"
 ]
 
 module.exports = {
@@ -189,33 +172,23 @@ module.exports = {
         // 假如文档放在一个特定的分支下：
         // docsBranch: 'master',
         lastUpdated: '上次更新时间',
-        // type: 'blog', // 主题类型
-        subSidebar: "auto",
+        author: "鱼丸粗面",
+        authorAvatar: 'logo.png', // 作者头像
+        mode: 'dark', // 默认auto
+        modePicker: true, // 默认true, 即可以切换模式
+        startYear: 2019,
+        type: 'blog', // 主题类型
         // 博客设置
-        /**
         blogConfig: {
             category: {
-                location: 2, // 在导航栏菜单中所占的位置，默认2
-                text: 'Category' // 默认 “分类”
+                location: 3, // 在导航栏菜单中所占的位置，默认2
+                text: '分类' // 默认 “分类”
             },
             tag: {
-                location: 3, // 在导航栏菜单中所占的位置，默认3
-                text: 'Tag' // 默认 “标签”
+                location: 4, // 在导航栏菜单中所占的位置，默认3
+                text: '标签' // 默认 “标签”
             }
         },
-        */
-        author: "鱼丸粗面",
-        // authorAvatar: 'logo.png', // 作者头像
-        mode: 'auto', // 默认auto
-        modePicker: true, // 默认true, 即可以切换模式
-        // 密钥
-        /**
-        keyPage: {
-            keys: ['e10adc3949ba59abbe56e057f20f883e'], // 1.3.0 版本后需要设置为密文
-            color: '#42b983', // 登录页动画球的颜色
-            lineColor: '#42b983' // 登录页动画线的颜色
-        },
-        */
         // 这里定义的是导航栏
         nav: [
             { text: "主页", link: "/", icon: "reco-home"},

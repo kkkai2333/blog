@@ -1,4 +1,15 @@
-# ReentrantLock
+---
+title: ReentrantLock 源码分析
+date: 2020-10-27
+categories:
+- juc
+tags:
+- 可重入锁
+sidebar: auto
+publish: true
+---
+
+**可重入锁.**
 
 ## 源码分析
 

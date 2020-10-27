@@ -196,8 +196,6 @@ broker端读取消息, 也是通过QueryMessageProcessor类的processRequest方�
 
 ### 通信机制
 
-
-
 ### 负载均衡
 
 rocketmq的负载均衡, 其实都是在Client端完成的, 具体有两个方面, 即producer端发送消息的负载均衡和consumer端消费消息的负载均衡.
@@ -220,12 +218,9 @@ producer端的负载均衡相对来说比较简单, producer在发送消息时, 
 
 consumer端的负载均衡实现, 主要在RebalanceImpl类中,
 
-
-
 有几个需要注意的地方, 如下,
 
 1. 如果一个ConsumerGroup下的consumer数量超过了订阅的topic的MessageQueue数量, 那超过的consumer不会消费消息, 这点和kafka差不多,
-2. 
 
 ## 常见问题
 

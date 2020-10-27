@@ -11,7 +11,7 @@ install:
   # - npm install
   # - npm run build
   - npm ci # 找不到vuepress，所以重新install了一次
-  - npm install -g vuepress
+  - npm install -D vuepress
   - npm install vuepress-theme-reco --save-dev
 
 script:

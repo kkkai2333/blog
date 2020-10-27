@@ -26,6 +26,7 @@
     "package.json": "2.0.1"
   },
   "devDependencies": {
+    "vuepress": "^1.7.1",
     "vuepress-theme-reco": "^1.5.7"
   }
 }

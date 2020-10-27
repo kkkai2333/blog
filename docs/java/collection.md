@@ -1,4 +1,13 @@
-# Java 集合
+---
+title: Java 集合
+date: 2020-10-27
+categories:
+- 集合
+tags:
+- collection
+sidebar: auto
+publish: false
+---
 
 ## 问题
 

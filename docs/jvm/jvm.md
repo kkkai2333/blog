@@ -1,12 +1,12 @@
 ---
-title: 基础
+title: JVM 基础
 date: 2020-10-27
 categories:
 - jvm
 tags:
 - java
 - jvm
-sidebar: false
+sidebar: auto
 publish: true
 ---
 

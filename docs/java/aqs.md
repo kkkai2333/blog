@@ -1,4 +1,14 @@
-# AbstractQueuedSynchronizer
+---
+title: AQS 源码分析
+date: 2020-10-27
+categories:
+- aqs
+tags:
+- juc
+- aqs
+sidebar: auto
+publish: false
+---
 
 **AQS类是JUC并发包下最核心的类，么得之一。**
 

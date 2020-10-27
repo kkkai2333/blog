@@ -7,7 +7,7 @@ tags:
 - mq
 - rabbitmq
 sidebar: auto
-publish: true
+publish: false
 ---
 
 ## 应用

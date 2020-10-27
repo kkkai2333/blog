@@ -7,7 +7,7 @@ tags:
 - mq
 - kafka
 sidebar: auto
-publish: true
+publish: false
 ---
 
 ## 概念
@@ -26,9 +26,9 @@ publish: true
        最最后, 可以设定一个重发阈值, 如果定时重发一直失败, 可以触发预警机制.
    
 2. kafka重复消费如何解决?
-  
+
   消息唯一标识 + 状态机
-  
+
 3. kafka自动提交offset会有什么问题?
 
   自动提交offset下, 是定时去处理的, 默认5s poll一次消息, 然后会自动commit上一次poll的最大offset

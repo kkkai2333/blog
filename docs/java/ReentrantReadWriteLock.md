@@ -1,6 +1,15 @@
-# ReentrantReadWriteLock
+---
+title: ReentrantReadWriteLock 源码分析
+date: 2020-10-27
+categories:
+- juc
+tags:
+- 读写锁
+sidebar: auto
+publish: true
+---
 
-**可重入读写锁**
+**可重入读写锁.**
 
 ## 源码分析
 

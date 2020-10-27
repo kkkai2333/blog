@@ -18,11 +18,11 @@
 
 **首先，Spring MVC是通过DispatcherServlet来处理请求的，那就先简单看下DispatcherServlet处理请求的流程。**
 
-![Spring-MVC-process-request](./img/spring/Spring-MVC-process-request.jpg)
+![Spring-MVC-process-request](./img/Spring-MVC-process-request.jpg)
 
 **然后，看下DispatcherServlet的简要类图，可以看到，DispatcherServlet是继承了Servlet的。**
 
-![DispatcherServlet](./img/spring/DispatcherServlet.png)
+![DispatcherServlet](./img/DispatcherServlet.png)
 
 spring MVC提供了三种方式，可以定义一个servlet。
 
@@ -202,10 +202,10 @@ protected void doDispatch(HttpServletRequest request, HttpServletResponse respon
 
 **RequestMappingHandlerMapping**
 
-![RequestMappingHandlerMapping](./img/spring/RequestMappingHandlerMapping.png)
+![RequestMappingHandlerMapping](./img/RequestMappingHandlerMapping.png)
 
 **RequestMappingHandlerAdapter**
 
-![RequestMappingHandlerAdapter](./img/spring/RequestMappingHandlerAdapter.png)
+![RequestMappingHandlerAdapter](./img/RequestMappingHandlerAdapter.png)
 
 ## 总结

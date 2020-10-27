@@ -1,6 +1,15 @@
-# CountDownLatch
+---
+title: CountDownLatch 源码分析
+date: 2020-10-27
+categories:
+- juc
+tags:
+- 倒计数器
+sidebar: auto
+publish: false
+---
 
-**倒计数器**
+**倒计数器.**
 
 ## 源码分析
 
@@ -10,7 +19,7 @@ CountDownLatch 倒计数器，可以用来实现，让所有线程都等待某�
 
 ### Sync
 
-CountDownLatch中定义了一个继承了AbstractQueuedSynchronizer的Sync类。
+CountDownLatch 中定义了一个继承了 AbstractQueuedSynchronizer 的Sync类。
 
 ```java
 private static final class Sync extends AbstractQueuedSynchronizer {
