@@ -1,4 +1,14 @@
-# Spring 依赖注入
+---
+title: Spring 依赖注入
+date: 2020-10-27
+categories:
+- spring
+tags:
+- spring
+- 依赖注入
+sidebar: auto
+publish: true
+---
 
 ## 问题
 

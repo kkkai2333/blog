@@ -7,7 +7,7 @@ tags:
 - mq
 - rocketmq
 sidebar: auto
-publish: true
+publish: false
 ---
 
 ## 概念

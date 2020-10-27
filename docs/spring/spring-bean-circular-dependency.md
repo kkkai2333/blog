@@ -1,4 +1,14 @@
-# Spring bean 循环依赖
+---
+title: Spring Bean 循环依赖
+date: 2020-10-27
+categories:
+- spring
+tags:
+- spring
+- 循环依赖
+sidebar: auto
+publish: true
+---
 
 ## 问题
 

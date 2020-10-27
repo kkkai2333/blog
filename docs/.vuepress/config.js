@@ -140,7 +140,7 @@ const redisArr = [
 
 const mqArr = [
     //"rabbitmq",
-    "rocketmq",
+    //"rocketmq",
     //"kafka"
 ]
 
@@ -276,11 +276,12 @@ module.exports = {
                 link: "/algorithm/"
             },
             */
+            /*
             {
                 text: "面试专题",
                 link: "/interview/"
             },
-            /*
+            
             {
                 text: "随便分享",
                 link: "/open/"

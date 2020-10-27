@@ -1,4 +1,13 @@
-# Spring Boot 启动流程
+---
+title: Spring Boot 启动流程
+date: 2020-10-27
+categories:
+- spring boot
+tags:
+- spring boot
+sidebar: auto
+publish: true
+---
 
 **OK，废话不多说，今天我们来聊一下，spring boot的启动流程。**
 
