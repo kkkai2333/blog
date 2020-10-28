@@ -1,7 +1,7 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "my blog",
   "main": "index.js",
   "directories": {
     "doc": "docs"
@@ -11,19 +11,17 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/itForeverYoung/blog.git"
-  },
+  "repository": "git+https://github.com/itForeverYoung/blog.git",
   "keywords": [],
-  "author": "",
+  "author": "yuwancumian",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/itForeverYoung/blog/issues"
   },
   "homepage": "https://github.com/itForeverYoung/blog#readme",
   "dependencies": {
-    "package.json": "2.0.1"
+    "package.json": "2.0.1",
+    "vuepress-plugin-sitemap": "^2.3.1"
   },
   "devDependencies": {
     "vuepress": "^1.7.1",

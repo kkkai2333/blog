@@ -10,13 +10,16 @@ install:
   # - npm ci
   # - npm install
   # - npm run build
-  - npm ci # 找不到vuepress，所以重新install了一次
-  - npm install -D vuepress
-  - npm install vuepress-theme-reco --save-dev
+  # - npm ci # 找不到vuepress，所以重新install了一次
+  # - npm install -D vuepress
+  # - npm install vuepress-theme-reco --save-dev
+  - yarn
+  - yarn add -D vuepress
+  - yarn add vuepress-theme-reco
 
 script:
   # - . deploy.sh # 这里可以调用之前写好的deploy.sh文件进行发布
-  - npm run docs:build
+  - yarn docs:build
   - cd docs/.vuepress/dist
   - echo 'blog.itforeveryoung.cn' > CNAME
 
