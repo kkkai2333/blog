@@ -11,7 +11,7 @@ jobs:
       uses: actions/checkout@master
 
     - name: Build and Install
-        run: npm install && npm install vuepress-theme-reco && npm run docs:build
+      run: npm install && npm install vuepress-theme-reco && npm run docs:build
 
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@master
