@@ -111,10 +111,6 @@ const zkArr = [
 
 ]
 
-const esArr = [
-
-]
-
 const mysqlArr = [
     "mysql",
     //"my-cat",
@@ -126,6 +122,16 @@ const mongoArr = [
 ]
 
 const hbaseArr = [
+
+]
+
+// elasticsearch
+const esArr = [
+
+]
+
+// clickhouse
+const ckArr = [
 
 ]
 
@@ -240,6 +246,10 @@ module.exports = {
                         text: "ElasticSearch",
                         link: "/es/"
                     },
+                    {
+                        text: "ClickHouse",
+                        link: "/ck/"
+                    },
                      */
                 ]
             },
@@ -352,7 +362,6 @@ module.exports = {
                 }
             ],
             // zk
-            // es
             '/db/mysql/': [
                 {
                     title: "MySQL专题",
@@ -368,6 +377,8 @@ module.exports = {
                 }
             ],
             // hbase
+            // es
+            // ck
             '/redis/': [
                 {
                     title: "Redis专题",
