@@ -153,7 +153,7 @@ const mqArr = [
 module.exports = {
     title: '孤帆远影碧空尽',
     description: 'Hello World',
-    base: "/blog",
+    base: "/blog/",
     head: [
         ['link', { rel: 'icon', href: '/logo.png' }]
     ],
