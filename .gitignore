@@ -1,4 +1,4 @@
 node_modules
-.vuepress/dist
+docs/.vuepress/dist
 snap
 git_push.sh
