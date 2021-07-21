@@ -5,7 +5,7 @@ categories:
 - spring
 tags:
 - spring
-- 依赖注入
+- di
 sidebar: auto
 publish: true
 ---

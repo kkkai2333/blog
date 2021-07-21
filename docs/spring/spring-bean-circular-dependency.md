@@ -5,7 +5,6 @@ categories:
 - spring
 tags:
 - spring
-- 循环依赖
 sidebar: auto
 publish: true
 ---
