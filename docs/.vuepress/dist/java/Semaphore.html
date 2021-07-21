@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Semaphore 源码分析 | 孤帆远影碧空尽</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/logo.png">
+    <meta name="description" content="Hello World">
+    
+    <link rel="preload" href="/assets/css/0.styles.8be25012.css" as="style"><link rel="preload" href="/assets/js/app.1002a89c.js" as="script"><link rel="preload" href="/assets/js/3.cddadb1a.js" as="script"><link rel="preload" href="/assets/js/1.576e2d55.js" as="script"><link rel="preload" href="/assets/js/85.7b37f315.js" as="script"><link rel="prefetch" href="/assets/js/10.59ce062b.js"><link rel="prefetch" href="/assets/js/100.1d2d4426.js"><link rel="prefetch" href="/assets/js/101.554e6542.js"><link rel="prefetch" href="/assets/js/102.8e4be2a0.js"><link rel="prefetch" href="/assets/js/103.9daed37a.js"><link rel="prefetch" href="/assets/js/104.ea9675d3.js"><link rel="prefetch" href="/assets/js/105.a24bd555.js"><link rel="prefetch" href="/assets/js/106.2eda500a.js"><link rel="prefetch" href="/assets/js/107.0a0357a7.js"><link rel="prefetch" href="/assets/js/108.607a21f4.js"><link rel="prefetch" href="/assets/js/109.054f8142.js"><link rel="prefetch" href="/assets/js/11.67f2f926.js"><link rel="prefetch" href="/assets/js/110.f93bf2f1.js"><link rel="prefetch" href="/assets/js/111.a537b775.js"><link rel="prefetch" href="/assets/js/112.56596858.js"><link rel="prefetch" href="/assets/js/113.31f8d0dc.js"><link rel="prefetch" href="/assets/js/114.8f9b3ea0.js"><link rel="prefetch" href="/assets/js/115.23ae689e.js"><link rel="prefetch" href="/assets/js/116.663cb172.js"><link rel="prefetch" href="/assets/js/117.17315aa6.js"><link rel="prefetch" href="/assets/js/118.9a0df1f5.js"><link rel="prefetch" href="/assets/js/119.2a68f572.js"><link rel="prefetch" href="/assets/js/12.5ad9bbbf.js"><link rel="prefetch" href="/assets/js/120.e10c18d1.js"><link rel="prefetch" href="/assets/js/121.4bc3b614.js"><link rel="prefetch" href="/assets/js/122.fa076eab.js"><link rel="prefetch" href="/assets/js/123.dd6b1fd0.js"><link rel="prefetch" href="/assets/js/124.375367dd.js"><link rel="prefetch" href="/assets/js/125.99008638.js"><link rel="prefetch" href="/assets/js/126.27d9ae80.js"><link rel="prefetch" href="/assets/js/127.6a71adf9.js"><link rel="prefetch" href="/assets/js/128.0a698a06.js"><link rel="prefetch" href="/assets/js/129.3f870925.js"><link rel="prefetch" href="/assets/js/13.dc87dedd.js"><link rel="prefetch" href="/assets/js/130.54329ef8.js"><link rel="prefetch" href="/assets/js/131.0d04947f.js"><link rel="prefetch" href="/assets/js/132.f4fd8145.js"><link rel="prefetch" href="/assets/js/133.899ee84e.js"><link rel="prefetch" href="/assets/js/134.bb076ad7.js"><link rel="prefetch" href="/assets/js/135.7488677d.js"><link rel="prefetch" href="/assets/js/136.339f0341.js"><link rel="prefetch" href="/assets/js/137.0388a1f2.js"><link rel="prefetch" href="/assets/js/138.be11c1f9.js"><link rel="prefetch" href="/assets/js/139.7e86e449.js"><link rel="prefetch" href="/assets/js/14.d889ee91.js"><link rel="prefetch" href="/assets/js/15.42495960.js"><link rel="prefetch" href="/assets/js/16.c583e115.js"><link rel="prefetch" href="/assets/js/17.486af1e0.js"><link rel="prefetch" href="/assets/js/18.46d29aca.js"><link rel="prefetch" href="/assets/js/19.a6059864.js"><link rel="prefetch" href="/assets/js/20.890e59d3.js"><link rel="prefetch" href="/assets/js/21.b5619173.js"><link rel="prefetch" href="/assets/js/22.e0a3db64.js"><link rel="prefetch" href="/assets/js/23.e4889c5d.js"><link rel="prefetch" href="/assets/js/24.fbf6057e.js"><link rel="prefetch" href="/assets/js/25.eb87f7c7.js"><link rel="prefetch" href="/assets/js/26.8e4e9584.js"><link rel="prefetch" href="/assets/js/27.e04b176f.js"><link rel="prefetch" href="/assets/js/28.5f09308f.js"><link rel="prefetch" href="/assets/js/29.c4f85e6e.js"><link rel="prefetch" href="/assets/js/30.45255409.js"><link rel="prefetch" href="/assets/js/31.0c3dd866.js"><link rel="prefetch" href="/assets/js/32.925e1f29.js"><link rel="prefetch" href="/assets/js/33.9e48b0ad.js"><link rel="prefetch" href="/assets/js/34.6d3e4301.js"><link rel="prefetch" href="/assets/js/35.5903abcd.js"><link rel="prefetch" href="/assets/js/36.08c89ef4.js"><link rel="prefetch" href="/assets/js/37.e989b1d2.js"><link rel="prefetch" href="/assets/js/38.6df1fd68.js"><link rel="prefetch" href="/assets/js/39.9a4c7f18.js"><link rel="prefetch" href="/assets/js/4.44799b0a.js"><link rel="prefetch" href="/assets/js/40.73151193.js"><link rel="prefetch" href="/assets/js/41.5a7f07cf.js"><link rel="prefetch" href="/assets/js/42.db61213b.js"><link rel="prefetch" href="/assets/js/43.b946c858.js"><link rel="prefetch" href="/assets/js/44.30675265.js"><link rel="prefetch" href="/assets/js/45.bb1a2afe.js"><link rel="prefetch" href="/assets/js/46.13b69ab9.js"><link rel="prefetch" href="/assets/js/47.9c3c545c.js"><link rel="prefetch" href="/assets/js/48.213d45d9.js"><link rel="prefetch" href="/assets/js/49.395d5ea7.js"><link rel="prefetch" href="/assets/js/5.14a81b9d.js"><link rel="prefetch" href="/assets/js/50.339ed5ff.js"><link rel="prefetch" href="/assets/js/51.10e45ae6.js"><link rel="prefetch" href="/assets/js/52.e1dad1e6.js"><link rel="prefetch" href="/assets/js/53.be818a68.js"><link rel="prefetch" href="/assets/js/54.18b302fb.js"><link rel="prefetch" href="/assets/js/55.7e013d2e.js"><link rel="prefetch" href="/assets/js/56.1517e7ce.js"><link rel="prefetch" href="/assets/js/57.93013f07.js"><link rel="prefetch" href="/assets/js/58.67d2da3e.js"><link rel="prefetch" href="/assets/js/59.50aa9cd9.js"><link rel="prefetch" href="/assets/js/6.02b7706d.js"><link rel="prefetch" href="/assets/js/60.231bb3cf.js"><link rel="prefetch" href="/assets/js/61.8d224483.js"><link rel="prefetch" href="/assets/js/62.97115225.js"><link rel="prefetch" href="/assets/js/63.f637bfef.js"><link rel="prefetch" href="/assets/js/64.df1c9c12.js"><link rel="prefetch" href="/assets/js/65.aa21fe33.js"><link rel="prefetch" href="/assets/js/66.b7de48b1.js"><link rel="prefetch" href="/assets/js/67.9470d374.js"><link rel="prefetch" href="/assets/js/68.64a32066.js"><link rel="prefetch" href="/assets/js/69.69460efa.js"><link rel="prefetch" href="/assets/js/7.f409d5f3.js"><link rel="prefetch" href="/assets/js/70.68b64ca8.js"><link rel="prefetch" href="/assets/js/71.0d84c62f.js"><link rel="prefetch" href="/assets/js/72.2bdc8e6b.js"><link rel="prefetch" href="/assets/js/73.59d1ec56.js"><link rel="prefetch" href="/assets/js/74.8332d66d.js"><link rel="prefetch" href="/assets/js/75.38be6a83.js"><link rel="prefetch" href="/assets/js/76.1c7dc7c0.js"><link rel="prefetch" href="/assets/js/77.df3f5997.js"><link rel="prefetch" href="/assets/js/78.2e5dc773.js"><link rel="prefetch" href="/assets/js/79.bad585f5.js"><link rel="prefetch" href="/assets/js/8.6a0b5a20.js"><link rel="prefetch" href="/assets/js/80.04dd71ba.js"><link rel="prefetch" href="/assets/js/81.dab37d6d.js"><link rel="prefetch" href="/assets/js/82.6163dfe3.js"><link rel="prefetch" href="/assets/js/83.c93a6ac2.js"><link rel="prefetch" href="/assets/js/84.be29bf24.js"><link rel="prefetch" href="/assets/js/86.ad68faa8.js"><link rel="prefetch" href="/assets/js/87.78a641e7.js"><link rel="prefetch" href="/assets/js/88.b3ce09f6.js"><link rel="prefetch" href="/assets/js/89.7d702598.js"><link rel="prefetch" href="/assets/js/9.39ce234a.js"><link rel="prefetch" href="/assets/js/90.1d0779eb.js"><link rel="prefetch" href="/assets/js/91.dc7ac77f.js"><link rel="prefetch" href="/assets/js/92.b04f5710.js"><link rel="prefetch" href="/assets/js/93.7ee05124.js"><link rel="prefetch" href="/assets/js/94.468e49c9.js"><link rel="prefetch" href="/assets/js/95.3135429e.js"><link rel="prefetch" href="/assets/js/96.2ca7b2d7.js"><link rel="prefetch" href="/assets/js/97.96824399.js"><link rel="prefetch" href="/assets/js/98.73f58ab3.js"><link rel="prefetch" href="/assets/js/99.5b3717c9.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.8be25012.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-1156296a><div data-v-1156296a><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-1156296a data-v-1156296a><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-4e82dffc data-v-1156296a data-v-1156296a><h3 class="title" data-v-4e82dffc data-v-4e82dffc>孤帆远影碧空尽</h3> <p class="description" data-v-4e82dffc data-v-4e82dffc>Hello World</p> <label id="box" class="inputBox" data-v-4e82dffc data-v-4e82dffc><input type="password" value="" data-v-4e82dffc> <span data-v-4e82dffc>Konck! Knock!</span> <button data-v-4e82dffc>OK</button></label> <div class="footer" data-v-4e82dffc data-v-4e82dffc><span data-v-4e82dffc><i class="iconfont reco-theme" data-v-4e82dffc></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-4e82dffc>vuePress-theme-reco</a></span> <span data-v-4e82dffc><i class="iconfont reco-copyright" data-v-4e82dffc></i> <a data-v-4e82dffc><span data-v-4e82dffc>鱼丸粗面</span>
+            
+          <span data-v-4e82dffc>2019 - </span>
+          2021
+        </a></span></div></div> <div class="hide" data-v-1156296a><header class="navbar" data-v-1156296a><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">孤帆远影碧空尽</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/c++/" class="nav-link"><i class="undefined"></i>
+  c++
+</a></li><li class="dropdown-item"><!----> <a href="/categories/c/" class="nav-link"><i class="undefined"></i>
+  c
+</a></li><li class="dropdown-item"><!----> <a href="/categories/clickhouse/" class="nav-link"><i class="undefined"></i>
+  clickhouse
+</a></li><li class="dropdown-item"><!----> <a href="/categories/mysql/" class="nav-link"><i class="undefined"></i>
+  mysql
+</a></li><li class="dropdown-item"><!----> <a href="/categories/design patterns/" class="nav-link"><i class="undefined"></i>
+  design patterns
+</a></li><li class="dropdown-item"><!----> <a href="/categories/juc/" class="nav-link"><i class="undefined"></i>
+  juc
+</a></li><li class="dropdown-item"><!----> <a href="/categories/aqs/" class="nav-link"><i class="undefined"></i>
+  aqs
+</a></li><li class="dropdown-item"><!----> <a href="/categories/集合/" class="nav-link"><i class="undefined"></i>
+  集合
+</a></li><li class="dropdown-item"><!----> <a href="/categories/jvm/" class="nav-link"><i class="undefined"></i>
+  jvm
+</a></li><li class="dropdown-item"><!----> <a href="/categories/mq/" class="nav-link"><i class="undefined"></i>
+  mq
+</a></li><li class="dropdown-item"><!----> <a href="/categories/spring/" class="nav-link"><i class="undefined"></i>
+  spring
+</a></li><li class="dropdown-item"><!----> <a href="/categories/spring boot/" class="nav-link"><i class="undefined"></i>
+  spring boot
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      Java
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/java/" class="nav-link router-link-active"><i class="undefined"></i>
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/jvm/" class="nav-link"><i class="undefined"></i>
+  Jvm
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      开源框架
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/spring/" class="nav-link"><i class="undefined"></i>
+  Spring
+</a></li><li class="dropdown-item"><!----> <a href="/dubbo/" class="nav-link"><i class="undefined"></i>
+  Dubbo
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      数据库
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/db/mysql/" class="nav-link"><i class="undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></div></div><div class="nav-item"><a href="/mq/" class="nav-link"><i class="undefined"></i>
+  消息中间件
+</a></div> <a href="https://github.com/lasilaso/blog" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask" data-v-1156296a></div> <aside class="sidebar" data-v-1156296a><div class="personal-info-wrapper" data-v-828910c6 data-v-1156296a><img src="logo.png" alt="author-avatar" class="personal-img" data-v-828910c6> <h3 class="name" data-v-828910c6>
+    鱼丸粗面
+  </h3> <div class="num" data-v-828910c6><div data-v-828910c6><h3 data-v-828910c6>117</h3> <h6 data-v-828910c6>文章</h6></div> <div data-v-828910c6><h3 data-v-828910c6>25</h3> <h6 data-v-828910c6>标签</h6></div></div> <ul class="social-links" data-v-828910c6></ul> <hr data-v-828910c6></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/c++/" class="nav-link"><i class="undefined"></i>
+  c++
+</a></li><li class="dropdown-item"><!----> <a href="/categories/c/" class="nav-link"><i class="undefined"></i>
+  c
+</a></li><li class="dropdown-item"><!----> <a href="/categories/clickhouse/" class="nav-link"><i class="undefined"></i>
+  clickhouse
+</a></li><li class="dropdown-item"><!----> <a href="/categories/mysql/" class="nav-link"><i class="undefined"></i>
+  mysql
+</a></li><li class="dropdown-item"><!----> <a href="/categories/design patterns/" class="nav-link"><i class="undefined"></i>
+  design patterns
+</a></li><li class="dropdown-item"><!----> <a href="/categories/juc/" class="nav-link"><i class="undefined"></i>
+  juc
+</a></li><li class="dropdown-item"><!----> <a href="/categories/aqs/" class="nav-link"><i class="undefined"></i>
+  aqs
+</a></li><li class="dropdown-item"><!----> <a href="/categories/集合/" class="nav-link"><i class="undefined"></i>
+  集合
+</a></li><li class="dropdown-item"><!----> <a href="/categories/jvm/" class="nav-link"><i class="undefined"></i>
+  jvm
+</a></li><li class="dropdown-item"><!----> <a href="/categories/mq/" class="nav-link"><i class="undefined"></i>
+  mq
+</a></li><li class="dropdown-item"><!----> <a href="/categories/spring/" class="nav-link"><i class="undefined"></i>
+  spring
+</a></li><li class="dropdown-item"><!----> <a href="/categories/spring boot/" class="nav-link"><i class="undefined"></i>
+  spring boot
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      Java
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/java/" class="nav-link router-link-active"><i class="undefined"></i>
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/jvm/" class="nav-link"><i class="undefined"></i>
+  Jvm
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      开源框架
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/spring/" class="nav-link"><i class="undefined"></i>
+  Spring
+</a></li><li class="dropdown-item"><!----> <a href="/dubbo/" class="nav-link"><i class="undefined"></i>
+  Dubbo
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      数据库
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/db/mysql/" class="nav-link"><i class="undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></div></div><div class="nav-item"><a href="/mq/" class="nav-link"><i class="undefined"></i>
+  消息中间件
+</a></div> <a href="https://github.com/lasilaso/blog" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Java专题</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/java/aqs.html" class="sidebar-link">AQS 源码分析</a></li><li><a href="/java/ReentrantLock.html" class="sidebar-link">ReentrantLock 源码分析</a></li><li><a href="/java/ReentrantReadWriteLock.html" class="sidebar-link">ReentrantReadWriteLock 源码分析</a></li><li><a href="/java/CountDownLatch.html" class="sidebar-link">CountDownLatch 源码分析</a></li><li><a href="/java/CyclicBarrier.html" class="sidebar-link">CyclicBarrier 源码分析</a></li><li><a href="/java/Semaphore.html" aria-current="page" class="active sidebar-link">Semaphore 源码分析</a></li><li><a href="/java/thread-pool-executor.html" class="sidebar-link">ThreadPoolExecutor 线程池</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-4e82dffc data-v-1156296a><h3 class="title" data-v-4e82dffc data-v-4e82dffc>Semaphore 源码分析</h3> <!----> <label id="box" class="inputBox" data-v-4e82dffc data-v-4e82dffc><input type="password" value="" data-v-4e82dffc> <span data-v-4e82dffc>Konck! Knock!</span> <button data-v-4e82dffc>OK</button></label> <div class="footer" data-v-4e82dffc data-v-4e82dffc><span data-v-4e82dffc><i class="iconfont reco-theme" data-v-4e82dffc></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-4e82dffc>vuePress-theme-reco</a></span> <span data-v-4e82dffc><i class="iconfont reco-copyright" data-v-4e82dffc></i> <a data-v-4e82dffc><span data-v-4e82dffc>鱼丸粗面</span>
+            
+          <span data-v-4e82dffc>2019 - </span>
+          2021
+        </a></span></div></div> <div data-v-1156296a><main class="page"><section><div class="page-title"><h1 class="title">Semaphore 源码分析</h1> <div data-v-1ff7123e><i class="iconfont reco-account" data-v-1ff7123e><span data-v-1ff7123e>鱼丸粗面</span></i> <i class="iconfont reco-date" data-v-1ff7123e><span data-v-1ff7123e>2020/10/27</span></i> <!----> <i class="tags iconfont reco-tag" data-v-1ff7123e><span class="tag-item" data-v-1ff7123e>信号量</span></i></div></div> <div class="theme-reco-content content__default"><p><strong>信号量.</strong></p> <h2 id="源码分析"><a href="#源码分析" class="header-anchor">#</a> 源码分析</h2> <p>Semaphore 信号量，可以用来实现，控制同一时间，资源可被访问的线程数量，一般可用于流量的控制。</p> <p>先明确几个名词，在本文中，</p> <p>加锁 == 申请许可</p> <p>释放锁 == 交还许可</p> <p>下面直接看源码。</p> <h3 id="sync"><a href="#sync" class="header-anchor">#</a> Sync</h3> <p>Semaphore中定义了一个内部类Sync，Sync继承了AQS类，通过对同步属性的加减和判断来实现申请/交还许可的操作。</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">abstract</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Sync</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractQueuedSynchronizer</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token number">1192457210091910933L</span><span class="token punctuation">;</span>
+		<span class="token comment">// 初始化AQS的同步属性state，默认初始化permits重锁。</span>
+    <span class="token class-name">Sync</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">permits</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setState</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 获取当前剩余的许可数量</span>
+    <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">getPermits</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">/**
+		 * 非公平锁申请acquires个许可，
+		 * 和FairSync#tryAcquireShared()方法的区别就是，不会判断等待队列中是否有线程排队，而是直接申请许可。
+		 * 1. 先得到当前的许可数量，available；
+  	 * 2. 然后用当前的许可数量减去要申请的许可数量，得到remaining，remaining = available-acquires，
+  	 * 2.1. 如果remaining &lt; 0，说明许可不够，那就返回remaining（是负数），申请许可失败；
+  	 * 2.2. 如果remaining &gt; 0，说明许可够，那就把同步属性state的值更新为remaining，原子更新；
+  	 * 2.2.1. 如果更新失败，就自旋，重新执行上述操作；
+  	 * 2.2.2. 如果更新成功，就返回remaining（是0或正数），申请许可成功。
+		 */</span>
+    <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">nonfairTryAcquireShared</span><span class="token punctuation">(</span><span class="token keyword">int</span> acquires<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          	<span class="token comment">// 先得到当前的许可数量</span>
+            <span class="token keyword">int</span> available <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          	<span class="token comment">// 然后用当前的许可数量减去要申请的许可数量</span>
+            <span class="token keyword">int</span> remaining <span class="token operator">=</span> available <span class="token operator">-</span> acquires<span class="token punctuation">;</span>
+          	<span class="token comment">/**
+          	 * 1. 如果remaining &lt; 0，说明许可不够，那就返回remaining（是负数），申请许可失败；
+  	 				 * 2. 如果remaining &gt; 0，说明许可够，那就把同步属性state的值更新为remaining，原子更新；
+  	 				 * 2.1. 如果更新失败，就自旋，重新执行上述操作；
+  	 				 * 2.2. 如果更新成功，就返回remaining（是0或正数），申请许可成功。
+		 				 */</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>remaining <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span>
+                <span class="token function">compareAndSetState</span><span class="token punctuation">(</span>available<span class="token punctuation">,</span> remaining<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> remaining<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 交还releases个许可</span>
+    <span class="token keyword">protected</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">tryReleaseShared</span><span class="token punctuation">(</span><span class="token keyword">int</span> releases<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          	<span class="token comment">// 先得到当前的许可数量</span>
+            <span class="token keyword">int</span> current <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          	<span class="token comment">// 然后用当前的许可数量加上要交还的许可数量</span>
+            <span class="token keyword">int</span> next <span class="token operator">=</span> current <span class="token operator">+</span> releases<span class="token punctuation">;</span>
+          	<span class="token comment">// 如果next &lt; current，说明交还了负数个许可，就抛出错误</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">&lt;</span> current，说明交还了负数个许可，就抛出错误<span class="token punctuation">)</span> <span class="token comment">// overflow</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&quot;Maximum permit count exceeded&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          	<span class="token comment">// 否则，就将state的值更新为next（新的许可数量），</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetState</span><span class="token punctuation">(</span>current<span class="token punctuation">,</span> next<span class="token punctuation">)</span><span class="token punctuation">)</span>
+              	<span class="token comment">// 更新成功后返回true</span>
+                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 减少许可的数量</span>
+    <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">reducePermits</span><span class="token punctuation">(</span><span class="token keyword">int</span> reductions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          	<span class="token comment">// 先得到当前的许可数量</span>
+            <span class="token keyword">int</span> current <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          	<span class="token comment">// 然后用当前的许可数量减去要减少的许可数量</span>
+            <span class="token keyword">int</span> next <span class="token operator">=</span> current <span class="token operator">-</span> reductions<span class="token punctuation">;</span>
+          	<span class="token comment">// 如果next &lt; current，说明申请了负数个许可，就抛出错误</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">&gt;</span> current<span class="token punctuation">)</span> <span class="token comment">// underflow</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&quot;Permit count underflow&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          	<span class="token comment">// 否则，就将state的值更新为next（新的许可数量）</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetState</span><span class="token punctuation">(</span>current<span class="token punctuation">,</span> next<span class="token punctuation">)</span><span class="token punctuation">)</span>
+              	<span class="token comment">// 更新成功后返回</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 获取并返回当前可用的许可数量</span>
+    <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">drainPermits</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> current <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          	<span class="token comment">/**
+          	 * 1. 如果当前许可数量为0，那就直接返回0；
+          	 * 2. 如果当前许可数量大于0，那就把state的值更新为0（原子操作），然后返回当前的许可数量。
+          	 */</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>current <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token function">compareAndSetState</span><span class="token punctuation">(</span>current<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> current<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="fairsync"><a href="#fairsync" class="header-anchor">#</a> FairSync</h3> <p>公平锁实现。</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">FairSync</span> <span class="token keyword">extends</span> <span class="token class-name">Sync</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token number">2014338818796000944L</span><span class="token punctuation">;</span>
+  	<span class="token comment">// 初始化公平锁，调用Sync的构造方法，传入默认的许可数量</span>
+    <span class="token class-name">FairSync</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">permits</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  	<span class="token comment">/** 
+  	 * 公平锁获取许可，下面总结一下方法的逻辑，
+  	 * 1. 首先判断当前等待队列中是否有线程排队，如果有，直接返回-1，加锁失败；
+  	 * 2. 如果没有线程排队，那就尝试获取许可；
+  	 * 2.1. 先得到当前的许可数量：available；
+  	 * 2.2. 然后用当前的许可数量减去要申请的许可数量，得到remaining，remaining = available-acquires，
+  	 * 3.1. 如果remaining &lt; 0，说明许可不够，那就返回remaining（是负数）,申请许可失败；
+  	 * 3.2. 如果remaining &gt; 0，说明许可够，那就把同步属性state的值更新为remaining，原子更新；
+  	 * 3.2.1. 如果更新失败，就自旋，重新执行上述操作；
+  	 * 3.2.2. 如果更新成功，就返回remaining（是0或正数），申请许可成功。
+  	 */</span>
+    <span class="token keyword">protected</span> <span class="token keyword">int</span> <span class="token function">tryAcquireShared</span><span class="token punctuation">(</span><span class="token keyword">int</span> acquires<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 首先判断当前等待队列中是否有线程排队，如果有，直接返回-1，申请许可失败</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">hasQueuedPredecessors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token comment">// 先得到当前的许可数量</span>
+        <span class="token keyword">int</span> available <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 然后用现有的许可数量减去要申请的许可数量</span>
+        <span class="token keyword">int</span> remaining <span class="token operator">=</span> available <span class="token operator">-</span> acquires<span class="token punctuation">;</span>
+        <span class="token comment">/**
+         * 1. 如果remaining &lt; 0，说明许可不够，那就返回remaining（是负数）,申请许可失败；
+  	 		 * 2. 如果remaining &gt; 0，说明许可够，那就把同步属性state的值更新为remaining，原子更新；
+  	 		 * 2.1. 如果更新失败，就自旋，重新执行上述操作；
+  	 		 * 2.2. 如果更新成功，就返回remaining（是0或正数），申请许可成功。
+         */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>remaining <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span>
+            <span class="token function">compareAndSetState</span><span class="token punctuation">(</span>available<span class="token punctuation">,</span> remaining<span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token keyword">return</span> remaining<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="nonfairsync"><a href="#nonfairsync" class="header-anchor">#</a> NonfairSync</h3> <p>非公平锁实现。</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">NonfairSync</span> <span class="token keyword">extends</span> <span class="token class-name">Sync</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">2694183684443567898L</span><span class="token punctuation">;</span>
+		<span class="token comment">// 初始化非公平锁，调用Sync的构造方法，传入默认的许可数量</span>
+    <span class="token class-name">NonfairSync</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">permits</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 直接调用父类Sync的非公平获取锁的方法</span>
+    <span class="token keyword">protected</span> <span class="token keyword">int</span> <span class="token function">tryAcquireShared</span><span class="token punctuation">(</span><span class="token keyword">int</span> acquires<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">nonfairTryAcquireShared</span><span class="token punctuation">(</span>acquires<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="semaphore"><a href="#semaphore" class="header-anchor">#</a> Semaphore</h3> <p>最后，看一下Semaphore自身提供的方法。</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">// 构造方法，初始化拥有permits个许可的信号量，默认初始化为非公平锁</span>
+<span class="token keyword">public</span> <span class="token class-name">Semaphore</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">permits</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    sync <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NonfairSync</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 构造方法，初始化拥有permits个许可的信号量，fair == true时，初始化为公平锁</span>
+<span class="token keyword">public</span> <span class="token class-name">Semaphore</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">permits</span><span class="token punctuation">,</span> <span class="token keyword">boolean</span> fair<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    sync <span class="token operator">=</span> fair <span class="token operator">?</span> <span class="token keyword">new</span> <span class="token class-name">FairSync</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">NonfairSync</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 申请1个许可，申请不到会进入等待队列排队，可响应中断</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">{</span>
+    sync<span class="token punctuation">.</span><span class="token function">acquireSharedInterruptibly</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 申请1个许可，申请不到会进入等待队列排队，不响应中断</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">acquireUninterruptibly</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    sync<span class="token punctuation">.</span><span class="token function">acquireShared</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 申请1个许可，申请不到直接返回false</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">nonfairTryAcquireShared</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/**
+ * 申请1个许可，带有超时时间
+ * 当线程
+ * 1. 获取到许可后，返回true；
+ * 2. 超时后都会返回false；
+ * 3. 被中断后会抛出InterruptedException异常
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span><span class="token keyword">long</span> timeout<span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span> unit<span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">tryAcquireSharedNanos</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> unit<span class="token punctuation">.</span><span class="token function">toNanos</span><span class="token punctuation">(</span>timeout<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 交还1个许可</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">release</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    sync<span class="token punctuation">.</span><span class="token function">releaseShared</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 申请permits个许可，申请不到会进入等待队列排队，可响应中断</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">permits</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">permits</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sync<span class="token punctuation">.</span><span class="token function">acquireSharedInterruptibly</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 申请permits个许可，申请不到会进入等待队列排队，不响应中断</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">acquireUninterruptibly</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">permits</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">permits</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sync<span class="token punctuation">.</span><span class="token function">acquireShared</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 申请permits个许可，申请不到直接返回false</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">permits</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">permits</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">nonfairTryAcquireShared</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">)</span> <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/**
+ * 申请permits个许可，带有超时时间
+ * 当线程
+ * 1. 获取到许可后，返回true；
+ * 2. 超时后都会返回false；
+ * 3. 被中断后会抛出InterruptedException异常
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">permits</span><span class="token punctuation">,</span> <span class="token keyword">long</span> timeout<span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span> unit<span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">permits</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">tryAcquireSharedNanos</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">,</span> unit<span class="token punctuation">.</span><span class="token function">toNanos</span><span class="token punctuation">(</span>timeout<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 交还permits个许可</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">release</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">permits</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">permits</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sync<span class="token punctuation">.</span><span class="token function">releaseShared</span><span class="token punctuation">(</span><span class="token keyword">permits</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 返回当前可用的许可数量</span>
+<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">availablePermits</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">getPermits</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 获取并返回当前可用的许可数量</span>
+<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">drainPermits</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">drainPermits</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 减少reduction个许可</span>
+<span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">reducePermits</span><span class="token punctuation">(</span><span class="token keyword">int</span> reduction<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>reduction <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sync<span class="token punctuation">.</span><span class="token function">reducePermits</span><span class="token punctuation">(</span>reduction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 返回当前是不是公平锁</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isFair</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sync <span class="token keyword">instanceof</span> <span class="token class-name">FairSync</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 返回当前有没有线程在排队</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">hasQueuedThreads</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">hasQueuedThreads</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 返回当前等待队列的长度</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">getQueueLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">getQueueLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 返回当前所有排队的线程集合</span>
+<span class="token keyword">protected</span> <span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Thread</span><span class="token punctuation">&gt;</span></span> <span class="token function">getQueuedThreads</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">getQueuedThreads</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <ol><li>Semaphore 信号量其实就是一把锁，只不过它是在acquire时释放锁，在release时加锁；</li> <li>当同步属性state == 0时，线程再去申请许可，就会失败，失败后就会进入等待队列阻塞；</li> <li>信号量初始化的时候可以选择公平锁或非公平锁；</li> <li>每个线程都需要拿到许可后再执行；</li> <li>但是请注意，线程不是一定要拿到许可后才能释放许可，可以直接调用release()方法释放许可，<strong>而这个操作会导致许可的数量增加</strong>；</li> <li>适用于限流操作，例如令牌桶算法。</li></ol></div></section> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/lasilaso/blog/edit/master/docs/java/Semaphore.md" target="_blank" rel="noopener noreferrer">在GitHub上编辑此页</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">上次更新时间: </span> <span class="time">2020/10/28 上午12:14:01</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev"><a href="/java/CyclicBarrier.html" class="prev">
+            CyclicBarrier 源码分析
+          </a></span> <span class="next"><a href="/java/thread-pool-executor.html">
+            ThreadPoolExecutor 线程池
+          </a></span></p></div> <div class="comments-wrapper"><!----></div> <ul class="side-bar sub-sidebar-wrapper" style="width:12rem;" data-v-70334359><li class="level-2" data-v-70334359><a href="/java/Semaphore.html#源码分析" class="sidebar-link reco-side-源码分析" data-v-70334359>源码分析</a></li><li class="level-3" data-v-70334359><a href="/java/Semaphore.html#sync" class="sidebar-link reco-side-sync" data-v-70334359>Sync</a></li><li class="level-3" data-v-70334359><a href="/java/Semaphore.html#fairsync" class="sidebar-link reco-side-fairsync" data-v-70334359>FairSync</a></li><li class="level-3" data-v-70334359><a href="/java/Semaphore.html#nonfairsync" class="sidebar-link reco-side-nonfairsync" data-v-70334359>NonfairSync</a></li><li class="level-3" data-v-70334359><a href="/java/Semaphore.html#semaphore" class="sidebar-link reco-side-semaphore" data-v-70334359>Semaphore</a></li><li class="level-2" data-v-70334359><a href="/java/Semaphore.html#总结" class="sidebar-link reco-side-总结" data-v-70334359>总结</a></li></ul></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.1002a89c.js" defer></script><script src="/assets/js/3.cddadb1a.js" defer></script><script src="/assets/js/1.576e2d55.js" defer></script><script src="/assets/js/85.7b37f315.js" defer></script>
+  </body>
+</html>

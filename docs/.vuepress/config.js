@@ -168,7 +168,7 @@ module.exports = {
     theme: "reco",
     themeConfig: {
         // Git项目地址，添加后会在导航栏的最后追加
-        repo: 'itForeverYoung/blog',
+        repo: 'lasilaso/blog',
         // 启用编辑
         editLinks: true,
         // 编辑按钮的 Text
