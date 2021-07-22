@@ -1,0 +1,25 @@
+name: blog
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Build and Install
+      run: |
+        npm install
+        npm install vuepress-theme-reco
+        npm run docs:build
+
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      with:
+        branch: gh-pages
+        folder: docs/.vuepress/dist

@@ -1,0 +1,31 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "my blog",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": "git+https://github.com/lasilaso/blog.git",
+  "keywords": [],
+  "author": "yuwancumian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lasilaso/blog/issues"
+  },
+  "homepage": "https://github.com/lasilaso/blog#readme",
+  "dependencies": {
+    "package.json": "2.0.1",
+    "vuepress-plugin-sitemap": "^2.3.1"
+  },
+  "devDependencies": {
+    "vuepress": "^1.8.2",
+    "vuepress-theme-reco": "^1.6.6",
+    "yarn": "^1.22.10"
+  }
+}
