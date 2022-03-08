@@ -1,11 +1,18 @@
-# ThreadLocal
+---
+title: ThreadLocal 相关
+date: 2021-09-28
+categories:
+- juc
+tags:
+- thread local
+sidebar: auto
+publish: true
+---
 
-## 问题
+## ThreadLocal
 
-1. ThreadLocal如何实现线程间数据隔离的？
-2. 父子线程如何共享数据？
+## InheritableThreadLocal
 
-## 源码分析
+## TransmittableThreadLocal
 
-## 总结
-
+## FastThreadLocal

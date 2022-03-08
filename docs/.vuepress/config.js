@@ -15,11 +15,11 @@ const interviewArr = [
     "mybatis",
     "mysql",
     "redis",
-    "dubbo",
-    "zookeeper",
-    "netty",
-    "tomcat",
-    "mq",
+    //"dubbo",
+    //"zookeeper",
+    //"netty",
+    //"tomcat",
+    //"mq",
     //"io",
     //"elastic-search",
     //"mongodb",
@@ -178,20 +178,26 @@ module.exports = {
         // 假如文档放在一个特定的分支下：
         // docsBranch: 'master',
         lastUpdated: '上次更新时间',
+        // 下一篇
+        nextLinks: true,
+        // 上一篇
+        prevLinks: true,
+        // 全局默认作者
         author: "鱼丸粗面",
         authorAvatar: 'logo.png', // 作者头像
         mode: 'dark', // 默认auto
         modePicker: true, // 默认true, 即可以切换模式
+        subSidebar: 'auto', // 默认打开侧边栏
         startYear: 2019,
         type: 'blog', // 主题类型
         // 博客设置
         blogConfig: {
             category: {
-                location: 3, // 在导航栏菜单中所占的位置，默认2
+                location: 2, // 在导航栏菜单中所占的位置，默认2
                 text: '分类' // 默认 “分类”
             },
             tag: {
-                location: 4, // 在导航栏菜单中所占的位置，默认3
+                location: 3, // 在导航栏菜单中所占的位置，默认3
                 text: '标签' // 默认 “标签”
             }
         },
@@ -369,6 +375,7 @@ module.exports = {
                     children: mysqlArr
                 }
             ],
+            /*
             '/db/mongodb/': [
                 {
                     title: "MongoDB专题",
@@ -376,6 +383,7 @@ module.exports = {
                     children: mongoArr
                 }
             ],
+            */
             // hbase
             // es
             // ck
@@ -393,6 +401,7 @@ module.exports = {
                     children: mqArr
                 }
             ],
+            /*
             '/interview/': [
                 {
                     title: "面试专题",
@@ -407,6 +416,7 @@ module.exports = {
                     children: openArr
                 }
             ]
+            */
         },
         // 1: 提取到h2级别标题，2: 提取到h3级别标题
         // sidebarDepth: 1

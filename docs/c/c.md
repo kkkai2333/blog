@@ -8,3 +8,9 @@ tags:
 sidebar: auto
 publish: false
 ---
+
+:::tip
+
+C 语言是计算机世界的基础.
+
+:::
