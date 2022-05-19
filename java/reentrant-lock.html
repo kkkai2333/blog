@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ReentrantLock 源码分析 | 孤帆远影碧空尽</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/blog/logo.png">
+    <meta name="description" content="Hello World">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.f89f62fb.css" as="style"><link rel="preload" href="/blog/assets/js/app.501f08d6.js" as="script"><link rel="preload" href="/blog/assets/js/3.cfebf711.js" as="script"><link rel="preload" href="/blog/assets/js/1.6ea4ff9d.js" as="script"><link rel="preload" href="/blog/assets/js/47.9555c1a0.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.8a475739.js"><link rel="prefetch" href="/blog/assets/js/11.da40e603.js"><link rel="prefetch" href="/blog/assets/js/12.2f590b17.js"><link rel="prefetch" href="/blog/assets/js/13.161577d0.js"><link rel="prefetch" href="/blog/assets/js/14.fa4971f7.js"><link rel="prefetch" href="/blog/assets/js/15.c53a47db.js"><link rel="prefetch" href="/blog/assets/js/16.4dc451d4.js"><link rel="prefetch" href="/blog/assets/js/17.c9a39345.js"><link rel="prefetch" href="/blog/assets/js/18.a915d702.js"><link rel="prefetch" href="/blog/assets/js/19.61f4b510.js"><link rel="prefetch" href="/blog/assets/js/20.c9b84644.js"><link rel="prefetch" href="/blog/assets/js/21.72ea1d80.js"><link rel="prefetch" href="/blog/assets/js/22.18cc1015.js"><link rel="prefetch" href="/blog/assets/js/23.e3f1314d.js"><link rel="prefetch" href="/blog/assets/js/24.25928f4a.js"><link rel="prefetch" href="/blog/assets/js/25.eeec6204.js"><link rel="prefetch" href="/blog/assets/js/26.1a516a4d.js"><link rel="prefetch" href="/blog/assets/js/27.df41c983.js"><link rel="prefetch" href="/blog/assets/js/28.cffb39a9.js"><link rel="prefetch" href="/blog/assets/js/29.5e5d2783.js"><link rel="prefetch" href="/blog/assets/js/30.573280df.js"><link rel="prefetch" href="/blog/assets/js/31.2e136c6f.js"><link rel="prefetch" href="/blog/assets/js/32.40fc0571.js"><link rel="prefetch" href="/blog/assets/js/33.a4575495.js"><link rel="prefetch" href="/blog/assets/js/34.df1de7ac.js"><link rel="prefetch" href="/blog/assets/js/35.2b430749.js"><link rel="prefetch" href="/blog/assets/js/36.92df8359.js"><link rel="prefetch" href="/blog/assets/js/37.d8dc67c6.js"><link rel="prefetch" href="/blog/assets/js/38.d850f0b1.js"><link rel="prefetch" href="/blog/assets/js/39.b7b39c0b.js"><link rel="prefetch" href="/blog/assets/js/4.d0487605.js"><link rel="prefetch" href="/blog/assets/js/40.e6a43064.js"><link rel="prefetch" href="/blog/assets/js/41.e8ca77eb.js"><link rel="prefetch" href="/blog/assets/js/42.af29e73f.js"><link rel="prefetch" href="/blog/assets/js/43.3c2a410f.js"><link rel="prefetch" href="/blog/assets/js/44.b296c1df.js"><link rel="prefetch" href="/blog/assets/js/45.aae8d6ac.js"><link rel="prefetch" href="/blog/assets/js/46.d13cb543.js"><link rel="prefetch" href="/blog/assets/js/48.624ae476.js"><link rel="prefetch" href="/blog/assets/js/49.7146efec.js"><link rel="prefetch" href="/blog/assets/js/5.0ab6801f.js"><link rel="prefetch" href="/blog/assets/js/50.10069ad7.js"><link rel="prefetch" href="/blog/assets/js/51.d53ec5aa.js"><link rel="prefetch" href="/blog/assets/js/52.0a598ab0.js"><link rel="prefetch" href="/blog/assets/js/53.41568dd1.js"><link rel="prefetch" href="/blog/assets/js/54.1116de64.js"><link rel="prefetch" href="/blog/assets/js/55.abc1f253.js"><link rel="prefetch" href="/blog/assets/js/56.2da4e3c1.js"><link rel="prefetch" href="/blog/assets/js/57.ef309097.js"><link rel="prefetch" href="/blog/assets/js/58.0150a7da.js"><link rel="prefetch" href="/blog/assets/js/59.88099f8f.js"><link rel="prefetch" href="/blog/assets/js/6.9d365f33.js"><link rel="prefetch" href="/blog/assets/js/60.de1b964d.js"><link rel="prefetch" href="/blog/assets/js/61.895ef144.js"><link rel="prefetch" href="/blog/assets/js/62.5830ac25.js"><link rel="prefetch" href="/blog/assets/js/63.d89118a6.js"><link rel="prefetch" href="/blog/assets/js/64.77222b48.js"><link rel="prefetch" href="/blog/assets/js/65.c9a34c81.js"><link rel="prefetch" href="/blog/assets/js/66.8e1f25ee.js"><link rel="prefetch" href="/blog/assets/js/67.d75fd4b8.js"><link rel="prefetch" href="/blog/assets/js/68.a6e8b670.js"><link rel="prefetch" href="/blog/assets/js/69.a337af5b.js"><link rel="prefetch" href="/blog/assets/js/7.39e3521e.js"><link rel="prefetch" href="/blog/assets/js/70.fb16fafa.js"><link rel="prefetch" href="/blog/assets/js/71.02b53a72.js"><link rel="prefetch" href="/blog/assets/js/72.432c7b2b.js"><link rel="prefetch" href="/blog/assets/js/73.c6c404cd.js"><link rel="prefetch" href="/blog/assets/js/74.a9ea23d8.js"><link rel="prefetch" href="/blog/assets/js/75.58e3f973.js"><link rel="prefetch" href="/blog/assets/js/76.cc9dc84b.js"><link rel="prefetch" href="/blog/assets/js/77.9094a2d7.js"><link rel="prefetch" href="/blog/assets/js/78.33ac103a.js"><link rel="prefetch" href="/blog/assets/js/79.70b9d5c6.js"><link rel="prefetch" href="/blog/assets/js/8.80e2acf9.js"><link rel="prefetch" href="/blog/assets/js/80.39cff388.js"><link rel="prefetch" href="/blog/assets/js/81.eb7db34f.js"><link rel="prefetch" href="/blog/assets/js/9.0cc41446.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.f89f62fb.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-130b300a><div data-v-130b300a><div class="password-shadow password-wrapper-out" style="display:none;" data-v-25ba6db2 data-v-130b300a data-v-130b300a><h3 class="title" data-v-25ba6db2 data-v-25ba6db2>孤帆远影碧空尽</h3> <p class="description" data-v-25ba6db2 data-v-25ba6db2>Hello World</p> <label id="box" class="inputBox" data-v-25ba6db2 data-v-25ba6db2><input type="password" value="" data-v-25ba6db2> <span data-v-25ba6db2>Konck! Knock!</span> <button data-v-25ba6db2>OK</button></label> <div class="footer" data-v-25ba6db2 data-v-25ba6db2><span data-v-25ba6db2><i class="iconfont reco-theme" data-v-25ba6db2></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-25ba6db2>vuePress-theme-reco</a></span> <span data-v-25ba6db2><i class="iconfont reco-copyright" data-v-25ba6db2></i> <a data-v-25ba6db2><span data-v-25ba6db2>鱼丸粗面</span>
+            
+          <span data-v-25ba6db2>2019 - </span>
+          2022
+        </a></span></div></div> <div class="hide" data-v-130b300a><header class="navbar" data-v-130b300a><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">孤帆远影碧空尽</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><a href="/blog/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/categories/c/" class="nav-link"><i class="undefined"></i>
+  c
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/mysql/" class="nav-link"><i class="undefined"></i>
+  mysql
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/design patterns/" class="nav-link"><i class="undefined"></i>
+  design patterns
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/dubbo/" class="nav-link"><i class="undefined"></i>
+  dubbo
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/java/" class="nav-link"><i class="undefined"></i>
+  java
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/jvm/" class="nav-link"><i class="undefined"></i>
+  jvm
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/mq/" class="nav-link"><i class="undefined"></i>
+  mq
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/redis/" class="nav-link"><i class="undefined"></i>
+  redis
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/spring/" class="nav-link"><i class="undefined"></i>
+  spring
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/spring boot/" class="nav-link"><i class="undefined"></i>
+  spring boot
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/spring cloud/" class="nav-link"><i class="undefined"></i>
+  spring cloud
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      Java
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/java/" class="nav-link router-link-active"><i class="undefined"></i>
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/blog/jvm/" class="nav-link"><i class="undefined"></i>
+  Jvm
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      开源框架
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/spring/" class="nav-link"><i class="undefined"></i>
+  Spring
+</a></li><li class="dropdown-item"><!----> <a href="/blog/dubbo/" class="nav-link"><i class="undefined"></i>
+  Dubbo
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      数据库
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/db/mysql/" class="nav-link"><i class="undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/blog/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/mq/" class="nav-link"><i class="undefined"></i>
+  消息中间件
+</a></div> <a href="https://github.com/lasilaso/blog" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask" data-v-130b300a></div> <aside class="sidebar" data-v-130b300a><div class="personal-info-wrapper" data-v-39576ba9 data-v-130b300a><img src="logo.png" alt="author-avatar" class="personal-img" data-v-39576ba9> <h3 class="name" data-v-39576ba9>
+    鱼丸粗面
+  </h3> <div class="num" data-v-39576ba9><div data-v-39576ba9><h3 data-v-39576ba9>10</h3> <h6 data-v-39576ba9>文章</h6></div> <div data-v-39576ba9><h3 data-v-39576ba9>21</h3> <h6 data-v-39576ba9>标签</h6></div></div> <ul class="social-links" data-v-39576ba9></ul> <hr data-v-39576ba9></div> <nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><a href="/blog/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/categories/c/" class="nav-link"><i class="undefined"></i>
+  c
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/mysql/" class="nav-link"><i class="undefined"></i>
+  mysql
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/design patterns/" class="nav-link"><i class="undefined"></i>
+  design patterns
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/dubbo/" class="nav-link"><i class="undefined"></i>
+  dubbo
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/java/" class="nav-link"><i class="undefined"></i>
+  java
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/jvm/" class="nav-link"><i class="undefined"></i>
+  jvm
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/mq/" class="nav-link"><i class="undefined"></i>
+  mq
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/redis/" class="nav-link"><i class="undefined"></i>
+  redis
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/spring/" class="nav-link"><i class="undefined"></i>
+  spring
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/spring boot/" class="nav-link"><i class="undefined"></i>
+  spring boot
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/spring cloud/" class="nav-link"><i class="undefined"></i>
+  spring cloud
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      Java
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/java/" class="nav-link router-link-active"><i class="undefined"></i>
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/blog/jvm/" class="nav-link"><i class="undefined"></i>
+  Jvm
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      开源框架
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/spring/" class="nav-link"><i class="undefined"></i>
+  Spring
+</a></li><li class="dropdown-item"><!----> <a href="/blog/dubbo/" class="nav-link"><i class="undefined"></i>
+  Dubbo
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      数据库
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/db/mysql/" class="nav-link"><i class="undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/blog/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/mq/" class="nav-link"><i class="undefined"></i>
+  消息中间件
+</a></div> <a href="https://github.com/lasilaso/blog" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Java</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/java/aqs.html" class="sidebar-link">AQS 源码分析</a></li><li><a href="/blog/java/reentrant-lock.html" aria-current="page" class="active sidebar-link">ReentrantLock 源码分析</a></li><li><a href="/blog/java/reentrant-read-write-lock.html" class="sidebar-link">ReentrantReadWriteLock 源码分析</a></li><li><a href="/blog/java/count-down-latch.html" class="sidebar-link">CountDownLatch 源码分析</a></li><li><a href="/blog/java/cyclic-barrier.html" class="sidebar-link">CyclicBarrier 源码分析</a></li><li><a href="/blog/java/semaphore.html" class="sidebar-link">Semaphore 源码分析</a></li><li><a href="/blog/java/thread-pool-executor.html" class="sidebar-link">ThreadPoolExecutor 线程池</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-25ba6db2 data-v-130b300a><h3 class="title" data-v-25ba6db2 data-v-25ba6db2>ReentrantLock 源码分析</h3> <!----> <label id="box" class="inputBox" data-v-25ba6db2 data-v-25ba6db2><input type="password" value="" data-v-25ba6db2> <span data-v-25ba6db2>Konck! Knock!</span> <button data-v-25ba6db2>OK</button></label> <div class="footer" data-v-25ba6db2 data-v-25ba6db2><span data-v-25ba6db2><i class="iconfont reco-theme" data-v-25ba6db2></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-25ba6db2>vuePress-theme-reco</a></span> <span data-v-25ba6db2><i class="iconfont reco-copyright" data-v-25ba6db2></i> <a data-v-25ba6db2><span data-v-25ba6db2>鱼丸粗面</span>
+            
+          <span data-v-25ba6db2>2019 - </span>
+          2022
+        </a></span></div></div> <div data-v-130b300a><main class="page"><section><div class="page-title"><h1 class="title">ReentrantLock 源码分析</h1> <div data-v-f875f3fc><i class="iconfont reco-account" data-v-f875f3fc><span data-v-f875f3fc>鱼丸粗面</span></i> <i class="iconfont reco-date" data-v-f875f3fc><span data-v-f875f3fc>2020/10/27</span></i> <!----> <i class="tags iconfont reco-tag" data-v-f875f3fc><span class="tag-item" data-v-f875f3fc>java</span><span class="tag-item" data-v-f875f3fc>juc</span></i></div></div> <div class="theme-reco-content content__default"><p><strong>可重入锁.</strong></p> <h2 id="源码分析"><a href="#源码分析" class="header-anchor">#</a> 源码分析</h2> <p>首先，ReentrantLock定义了一个内部抽象类Sync，Sync继承了<a href="/blog/java/aqs.html">AQS</a>类。</p> <p>ReentrantLock的方法基本都是包装了一下其内部的Sync类的实例属性提供的方法。</p> <p>下面就来看下Sync类的定义。</p> <h3 id="sync"><a href="#sync" class="header-anchor">#</a> Sync</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">// Sync的父类是AQS类</span>
+<span class="token keyword">abstract</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Sync</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractQueuedSynchronizer</span> <span class="token punctuation">{</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">5179523762034025860L</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 定义了一个抽象方法，lock，以供子类实现</span>
+  <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 定义了一个非公平的tryAcquire方法</span>
+  <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">nonfairTryAcquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> acquires<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 拿到当前的线程</span>
+    <span class="token keyword">final</span> <span class="token class-name">Thread</span> current <span class="token operator">=</span> <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 获取当前锁的状态，getState()是父类定义的方法</span>
+    <span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 如果c==0，代表现在是无锁状态</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 直接通过cas设置父类的state属性，</span>
+      <span class="token comment">// compareAndSetState()是父类提供的方法，用来设置其state属性</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> acquires<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//如果设置state成功，代表当前线程抢锁成功，就把当前线程设置为锁的独占线程</span>
+        <span class="token comment">// setExclusiveOwnerThread()是AQS类的父类提供的方法</span>
+        <span class="token function">setExclusiveOwnerThread</span><span class="token punctuation">(</span>current<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 返回true，代表得到锁</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 如果c != 0，代表当前已经有线程持有锁了，那就判断一下，当前线程是不是持有锁的独占线程</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>current <span class="token operator">==</span> <span class="token function">getExclusiveOwnerThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 如果就是当前线程持有锁，那就把state+acquires，一般来说，acquires=1</span>
+      <span class="token keyword">int</span> nextc <span class="token operator">=</span> c <span class="token operator">+</span> acquires<span class="token punctuation">;</span>
+      <span class="token comment">// 判断一下nextc的值，不能小于0</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>nextc <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">// overflow</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&quot;Maximum lock count exceeded&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// 设置state的值</span>
+      <span class="token comment">// 这里其实就体现了ReentrantLock的可重入性，即，如果持有锁的线程又来加锁，那就把锁状态state+1，</span>
+      <span class="token comment">// 相对的，释放锁时，就要把state-1，直到state == 0</span>
+      <span class="token function">setState</span><span class="token punctuation">(</span>nextc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// 返回true，代表得到锁</span>
+      <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 返回false，代表抢锁失败</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 尝试释放锁</span>
+  <span class="token keyword">protected</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">tryRelease</span><span class="token punctuation">(</span><span class="token keyword">int</span> releases<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 定义一个局部变量c，将父类的state-releases，releases一般为1</span>
+    <span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> releases<span class="token punctuation">;</span>
+    <span class="token comment">// 判断当前线程是否为持有锁的线程</span>
+    <span class="token comment">// ？问题1 - 这里有点奇怪，为什么不先判断，再定义变量c</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token function">getExclusiveOwnerThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalMonitorStateException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// free</span>
+    <span class="token keyword">boolean</span> free <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token comment">// 上文也提到过，ReentrantLock是可重入锁，通过父类的state来实现，那么，在释放锁的时候，只有c == 0时，才代表持有锁的线程已经把它加的锁都释放了</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      free <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      <span class="token comment">// 把锁的独占线程设置为null</span>
+      <span class="token function">setExclusiveOwnerThread</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 将c设置到父类的state属性上</span>
+    <span class="token function">setState</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 这里有两种情况：</span>
+    <span class="token comment">// 1，free=true，代表现在已经是无锁状态</span>
+    <span class="token comment">// 2，free=false，代表当前只release了n重锁（n=releases，一般为1）</span>
+    <span class="token keyword">return</span> free<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 判断当前线程是不是持有锁的线程</span>
+  <span class="token keyword">protected</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">isHeldExclusively</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">getExclusiveOwnerThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 定义了一个条件锁（下文会详细讲）</span>
+  <span class="token keyword">final</span> <span class="token class-name">ConditionObject</span> <span class="token function">newCondition</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ConditionObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// Methods relayed from outer class</span>
+  <span class="token comment">// 返回当前持有锁的线程，如果现在是无锁状态，则返回null</span>
+  <span class="token keyword">final</span> <span class="token class-name">Thread</span> <span class="token function">getOwner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token keyword">null</span> <span class="token operator">:</span> <span class="token function">getExclusiveOwnerThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 返回当前持有锁的线程的重入次数，如果现在是无锁状态，返回0</span>
+  <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">getHoldCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">isHeldExclusively</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 返回当前是不是有锁状态</span>
+  <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">isLocked</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 定义了一个反序列化时会调用方法，即如果是反序列化得到当前对象，需要设置为无锁状态</span>
+  <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">readObject</span><span class="token punctuation">(</span><span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span>ObjectInputStream</span> s<span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span>IOException</span><span class="token punctuation">,</span> <span class="token class-name">ClassNotFoundException</span> <span class="token punctuation">{</span>
+    s<span class="token punctuation">.</span><span class="token function">defaultReadObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// reset to unlocked state</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>然后，ReentrantLock还定义了两个Sync的继承类，分别是FairSync和NonfairSync，也就是常说的公平锁和非公平锁，那么，下面就看下这两个类的定义。</p> <h3 id="fairsync"><a href="#fairsync" class="header-anchor">#</a> FairSync</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">// 公平锁</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">FairSync</span> <span class="token keyword">extends</span> <span class="token class-name">Sync</span> <span class="token punctuation">{</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3000897897090466540L</span><span class="token punctuation">;</span>
+  <span class="token comment">// 公平锁的加锁实现比较简单</span>
+  <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 直接调用AQS类的acquire方法</span>
+    <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// tryAcquire的公平实现，可以和Sync#nonfairTryAcquire()方法对比下，基本一致</span>
+  <span class="token keyword">protected</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> acquires<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">final</span> <span class="token class-name">Thread</span> current <span class="token operator">=</span> <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 唯一的不同在这里，公平锁的tryAcquire，会先调用AQS类的hasQueuedPredecessors()方法，去判断当前线程能不能去尝试加锁</span>
+      <span class="token comment">// 其实hasQueuedPredecessors()方法还挺复杂的，所以放到AQS类文章中进行分析，这里只需要知道这个方法的返回代表什么含义即可</span>
+      <span class="token comment">// true：不可以去尝试加锁 false：可以去尝试加锁</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">hasQueuedPredecessors</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+          <span class="token function">compareAndSetState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> acquires<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setExclusiveOwnerThread</span><span class="token punctuation">(</span>current<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 下面这个else和Sync#nonfairTryAcquire()方法一样</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>current <span class="token operator">==</span> <span class="token function">getExclusiveOwnerThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">int</span> nextc <span class="token operator">=</span> c <span class="token operator">+</span> acquires<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>nextc <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&quot;Maximum lock count exceeded&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">setState</span><span class="token punctuation">(</span>nextc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="nonfairsync"><a href="#nonfairsync" class="header-anchor">#</a> NonfairSync</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">// 非公平锁</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">NonfairSync</span> <span class="token keyword">extends</span> <span class="token class-name">Sync</span> <span class="token punctuation">{</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token number">7316153563782823691L</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 非公平锁的加锁实现也比较简单</span>
+  <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 首先，直接尝试去加锁，即调用AQS类的compareAndSetState()方法去设置state的值</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token comment">// 如果加锁成功，就设置当前线程为持有锁的线程</span>
+      <span class="token function">setExclusiveOwnerThread</span><span class="token punctuation">(</span><span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+      <span class="token comment">// 否则，调用AQS类的acquire方法</span>
+      <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// tryAcquire的非公平实现，其实就是调用了父类Sync的nonfairTryAcquire()方法</span>
+  <span class="token keyword">protected</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> acquires<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">nonfairTryAcquire</span><span class="token punctuation">(</span>acquires<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>最后，就来看下ReentrantLock自己对外提供的方法吧，直接看代码。</p> <h3 id="reentrantlock"><a href="#reentrantlock" class="header-anchor">#</a> ReentrantLock</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">// ReentrantLock的主体类定义</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ReentrantLock</span> <span class="token keyword">implements</span> <span class="token class-name">Lock</span><span class="token punctuation">,</span> <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span>Serializable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token number">7373984872572414699L</span><span class="token punctuation">;</span>
+    <span class="token comment">/** Synchronizer providing all implementation mechanics */</span>
+    <span class="token comment">// 定义了一个Sync的实例属性</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Sync</span> sync<span class="token punctuation">;</span>
+    <span class="token comment">// 默认初始化一个非公平锁</span>
+    <span class="token keyword">public</span> <span class="token class-name">ReentrantLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sync <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NonfairSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 根据入参初始化，如果为true，则初始化一个公平锁</span>
+    <span class="token keyword">public</span> <span class="token class-name">ReentrantLock</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> fair<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sync <span class="token operator">=</span> fair <span class="token operator">?</span> <span class="token keyword">new</span> <span class="token class-name">FairSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">NonfairSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// lock方法，实际上就是调用了FairSync/NoFairLock的lock()方法</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sync<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 如果需要在线程被中断时抛出异常，则调用此方法</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">lockInterruptibly</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 默认是调用了AQS类的acquireInterruptibly()方法</span>
+        <span class="token comment">// 关于acquireInterruptibly()方法的分析，请参考AQS类分析的文章</span>
+        sync<span class="token punctuation">.</span><span class="token function">acquireInterruptibly</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 尝试加锁，tryLock和lock的区别是，tryLock不会阻塞，加锁成功返回true，加锁失败就会返回false</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">tryLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 方法内部就是调用了Sync的acquire的非公平锁实现</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">nonfairTryAcquire</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 带超时时间的tryLock，在指定时间内如果没有得到锁，则返回false</span>
+    <span class="token comment">// 而且，和tryLock()不一样的是，1. 可以响应中断；2. 在第一次没有抢到锁之后，会加入等待队列。</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">tryLock</span><span class="token punctuation">(</span><span class="token keyword">long</span> timeout<span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span> unit<span class="token punctuation">)</span>
+            <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 方法内部就是调用了AQS类的tryAcquireNanos()方法</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">tryAcquireNanos</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> unit<span class="token punctuation">.</span><span class="token function">toNanos</span><span class="token punctuation">(</span>timeout<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 释放锁</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 方法内部就是调用了Sync的release()方法</span>
+        sync<span class="token punctuation">.</span><span class="token function">release</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 获取一个条件锁对象</span>
+    <span class="token keyword">public</span> <span class="token class-name">Condition</span> <span class="token function">newCondition</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">newCondition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回当前持有锁的线程的重入次数</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getHoldCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">getHoldCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回当前线程是否是持有锁的线程</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isHeldByCurrentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">isHeldExclusively</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回当前是否是有锁状态</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isLocked</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">isLocked</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回当前是公平锁还是非公平锁</span>
+    <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">isFair</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sync <span class="token keyword">instanceof</span> <span class="token class-name">FairSync</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回当前持有锁的线程</span>
+    <span class="token keyword">protected</span> <span class="token class-name">Thread</span> <span class="token function">getOwner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">getOwner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回当前AQS类的等待队列中是否有线程</span>
+    <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">hasQueuedThreads</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">hasQueuedThreads</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回传入的线程是否在AQS类的等待队列中</span>
+    <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">hasQueuedThread</span><span class="token punctuation">(</span><span class="token class-name">Thread</span> thread<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">isQueued</span><span class="token punctuation">(</span>thread<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回当前AQS类的等待队列的长度</span>
+    <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">getQueueLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">getQueueLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回当前AQS类的等待队列的所有线程的集合</span>
+    <span class="token keyword">protected</span> <span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Thread</span><span class="token punctuation">&gt;</span></span> <span class="token function">getQueuedThreads</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">getQueuedThreads</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回condition的条件队列是否有线程在等待</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">hasWaiters</span><span class="token punctuation">(</span><span class="token class-name">Condition</span> condition<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>condition <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>condition <span class="token keyword">instanceof</span> <span class="token class-name">AbstractQueuedSynchronizer<span class="token punctuation">.</span>ConditionObject</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">&quot;not owner&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">hasWaiters</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">AbstractQueuedSynchronizer<span class="token punctuation">.</span>ConditionObject</span><span class="token punctuation">)</span>condition<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回condition的条件队列的长度</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getWaitQueueLength</span><span class="token punctuation">(</span><span class="token class-name">Condition</span> condition<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>condition <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>condition <span class="token keyword">instanceof</span> <span class="token class-name">AbstractQueuedSynchronizer<span class="token punctuation">.</span>ConditionObject</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">&quot;not owner&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">getWaitQueueLength</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">AbstractQueuedSynchronizer<span class="token punctuation">.</span>ConditionObject</span><span class="token punctuation">)</span>condition<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 返回condition的条件队列中的所有线程的集合</span>
+    <span class="token keyword">protected</span> <span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Thread</span><span class="token punctuation">&gt;</span></span> <span class="token function">getWaitingThreads</span><span class="token punctuation">(</span><span class="token class-name">Condition</span> condition<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>condition <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>condition <span class="token keyword">instanceof</span> <span class="token class-name">AbstractQueuedSynchronizer<span class="token punctuation">.</span>ConditionObject</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">&quot;not owner&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">getWaitingThreads</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">AbstractQueuedSynchronizer<span class="token punctuation">.</span>ConditionObject</span><span class="token punctuation">)</span>condition<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">// 重写了toString方法，判断当前是否有锁，如果有锁，返回持有锁的线程的名称；如果无锁，返回Unlocked</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Thread</span> o <span class="token operator">=</span> sync<span class="token punctuation">.</span><span class="token function">getOwner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>o <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">?</span>
+                                   <span class="token string">&quot;[Unlocked]&quot;</span> <span class="token operator">:</span>
+                                   <span class="token string">&quot;[Locked by thread &quot;</span> <span class="token operator">+</span> o<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;]&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>上文中有部分方法是在AQS类中实现的，这里做一下标注，可点击跳转，查看源码分析。</p> <ol><li><a href="/blog/java/aqs.html#compareAndSet">AbstractQueuedSynchronizer#compareAndSetState</a></li> <li><a href="/blog/java/aqs.html#hasQueuedPredecessors">AbstractQueuedSynchronizer#hasQueuedPredecessors</a></li> <li><a href="/blog/java/aqs.html#acquire">AbstractQueuedSynchronizer#acquire</a></li> <li><a href="/blog/java/aqs.html#acquireInterruptibly">AbstractQueuedSynchronizer#acquireInterruptibly</a></li></ol> <p>至此，ReentrantLock的源码就分析完了。</p> <h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <ol><li>ReentrantLock是独占锁。</li> <li>ReentrantLock是可重入锁，每重入一次，其内部的sync对象的同步状态属性state+1。</li> <li>ReentrantLock默认是非公平锁，可以在调用构造方法时传入true定义成公平锁。</li> <li>ReentrantLock实现的公平锁和非公平锁的区别是，
+<ol><li>公平锁在锁等待队列不为空时，会直接入队；</li> <li>非公平锁会先尝试加锁一次，如果加锁失败，再入队。</li></ol></li> <li><s>ReentrantLock的tryLock()方法，是调用的sync的非公平锁实现，也就是说，即便把ReentrantLock定义为公平锁，如果调用的是tryLock()方法，它也会直接去抢锁，抢锁失败后直接返回。（但是，仔细想想，本来也应该是这样，因为tryLock是不阻塞的，也就没有入队这一说了。）</s></li> <li>ReentrantLock的tryLock(long timeout, TimeUnit unit)方法和默认的tryLock()方法不太一样，
+<ol><li>可以响应中断；</li> <li>在第一次没有抢到锁之后，会加入等待队列；</li> <li>超时之后直接返回false。</li></ol></li> <li>ReentrantLock的lock()方法不能响应中断，如果需要响应中断的话，请使用lockInterruptibly()方法。</li> <li>如果想要使用AQS的条件队列，必须要先new一个AbstractQueuedSynchronizer.ConditionObject的对象。</li></ol></div></section> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/lasilaso/blog/edit/master/docs/java/reentrant-lock.md" target="_blank" rel="noopener noreferrer">在GitHub上编辑此页</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">上次更新时间: </span> <span class="time">2022/5/19 10:59:12</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev"><a href="/blog/java/aqs.html" class="prev">
+            AQS 源码分析
+          </a></span> <span class="next"><a href="/blog/java/reentrant-read-write-lock.html">
+            ReentrantReadWriteLock 源码分析
+          </a></span></p></div> <div class="comments-wrapper"><!----></div> <ul class="side-bar sub-sidebar-wrapper" style="width:12rem;" data-v-cb1513f6><li class="level-2" data-v-cb1513f6><a href="/blog/java/reentrant-lock.html#源码分析" class="sidebar-link reco-side-源码分析" data-v-cb1513f6>源码分析</a></li><li class="level-3" data-v-cb1513f6><a href="/blog/java/reentrant-lock.html#sync" class="sidebar-link reco-side-sync" data-v-cb1513f6>Sync</a></li><li class="level-3" data-v-cb1513f6><a href="/blog/java/reentrant-lock.html#fairsync" class="sidebar-link reco-side-fairsync" data-v-cb1513f6>FairSync</a></li><li class="level-3" data-v-cb1513f6><a href="/blog/java/reentrant-lock.html#nonfairsync" class="sidebar-link reco-side-nonfairsync" data-v-cb1513f6>NonfairSync</a></li><li class="level-3" data-v-cb1513f6><a href="/blog/java/reentrant-lock.html#reentrantlock" class="sidebar-link reco-side-reentrantlock" data-v-cb1513f6>ReentrantLock</a></li><li class="level-2" data-v-cb1513f6><a href="/blog/java/reentrant-lock.html#总结" class="sidebar-link reco-side-总结" data-v-cb1513f6>总结</a></li></ul></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/blog/assets/js/app.501f08d6.js" defer></script><script src="/blog/assets/js/3.cfebf711.js" defer></script><script src="/blog/assets/js/1.6ea4ff9d.js" defer></script><script src="/blog/assets/js/47.9555c1a0.js" defer></script>
+  </body>
+</html>
