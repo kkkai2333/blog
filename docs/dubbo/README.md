@@ -1,4 +1,9 @@
-# Dubbo 篇
+---
+title: Dubbo
+date: 2022-05-09
+sidebar: auto
+publish: false
+---
 
 ## Dubbo 知识图谱
 

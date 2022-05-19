@@ -1,4 +1,13 @@
-# Redis 过期删除策略
+---
+title: 过期删除策略
+date: 2022-05-09
+categories:
+- redis
+tags:
+- redis
+sidebar: auto
+publish: false
+---
 
 ## 基础
 

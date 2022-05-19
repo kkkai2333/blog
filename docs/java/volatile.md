@@ -1,4 +1,13 @@
-# volatile 关键字
+---
+title: volatile
+date: 2022-05-19
+categories:
+- java
+tags:
+- java
+sidebar: auto
+publish: false
+---
 
 ## 问题
 

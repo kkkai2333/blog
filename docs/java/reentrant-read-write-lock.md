@@ -2,9 +2,10 @@
 title: ReentrantReadWriteLock 源码分析
 date: 2020-10-27
 categories:
-- juc
+- java
 tags:
-- 读写锁
+- java
+- juc
 sidebar: auto
 publish: true
 ---

@@ -2,9 +2,10 @@
 title: CyclicBarrier 源码分析
 date: 2020-10-27
 categories:
-- juc
+- java
 tags:
-- 栅栏机制
+- java
+- juc
 sidebar: auto
 publish: true
 ---

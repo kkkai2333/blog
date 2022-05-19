@@ -5,7 +5,6 @@ categories:
 - spring
 tags:
 - spring
-- di
 sidebar: auto
 publish: true
 ---

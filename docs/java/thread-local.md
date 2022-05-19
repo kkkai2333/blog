@@ -1,4 +1,13 @@
-# ThreadLocal
+---
+title: ThreadLocal 是什么
+date: 2022-05-19
+categories:
+- java
+tags:
+- java
+sidebar: auto
+publish: false
+---
 
 ## 问题
 

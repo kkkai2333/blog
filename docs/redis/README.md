@@ -1,6 +1,11 @@
-# Redis 专题
+---
+title: Redis
+date: 2022-05-09
+sidebar: auto
+publish: false
+---
 
-首先，看一下Redis的知识图谱。
+## 知识图谱
 
 ![Redis知识图谱](./img/redis.jpg)
 

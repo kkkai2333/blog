@@ -1,40 +1,5 @@
 // emacs ~/OneDrive/code/github/blog/docs/.vuepress/config.js
 
-const openArr = [
-    //"build-blog"
-];
-
-const algorithmArr = [
-    
-];
-
-const interviewArr = [
-    "java",
-    "jvm",
-    "spring",
-    "mybatis",
-    "mysql",
-    "redis",
-    "dubbo",
-    "zookeeper",
-    "netty",
-    "tomcat",
-    "mq",
-    //"io",
-    //"elastic-search",
-    //"mongodb",
-    //"docker",
-    //"linux",
-    //"分库分表",
-    //"设计模式",
-    //"排序算法",
-    //"计算机网络",
-    //"经典数据结构",
-    //"高并发系统设计",
-    //"java-web"
-    
-];
-
 const javaArr = [
     //"collection",
     //"hashmap",
@@ -43,12 +8,12 @@ const javaArr = [
     //"proxy",
     //"juc",
     "aqs",
-    "ReentrantLock",
-    "ReentrantReadWriteLock",
+    "reentrant-lock",
+    "reentrant-read-write-lock",
     //"StampedLock",
-    "CountDownLatch",
-    "CyclicBarrier",
-    "Semaphore",
+    "count-down-latch",
+    "cyclic-barrier",
+    "semaphore",
     //"atomic",
     "thread-pool-executor",
     //"thread-local",
@@ -99,11 +64,11 @@ const mybatisArr = [
 
 ]
 
-const nettyArr = [
+const tomcatArr = [
 
 ]
 
-const tomcatArr = [
+const nettyArr = [
 
 ]
 
@@ -116,6 +81,49 @@ const mysqlArr = [
     //"my-cat",
     //"sharding-sphere",
 ]
+
+const redisArr = [
+    //"redis-data-type",
+    //"redis-data-structure",
+    //"redis-persistence",
+    //"redis-expire-delete",
+    //"redis-enviction",
+    //"redis-ha",
+];
+
+const mqArr = [
+    //"rocketmq",
+    //"kafka"
+]
+
+const interviewArr = [
+    //"java",
+    //"jvm",
+    //"spring",
+    //"mybatis",
+    //"mysql",
+    //"redis",
+    //"dubbo",
+    //"zookeeper",
+    //"netty",
+    //"tomcat",
+    //"mq",
+    //"io",
+    //"elastic-search",
+    //"mongodb",
+    //"docker",
+    //"linux",
+    //"java-web"
+    
+];
+
+const openArr = [
+    //"build-blog"
+];
+
+const algorithmArr = [
+    
+];
 
 const mongoArr = [
 
@@ -135,21 +143,6 @@ const ckArr = [
 
 ]
 
-const redisArr = [
-    //"redis-data-type",
-    //"redis-data-structure",
-    //"redis-persistence",
-    //"redis-expire-delete",
-    //"redis-enviction",
-    //"redis-ha",
-];
-
-const mqArr = [
-    //"rabbitmq",
-    //"rocketmq",
-    //"kafka"
-]
-
 module.exports = {
     title: '孤帆远影碧空尽',
     description: 'Hello World',
@@ -165,7 +158,9 @@ module.exports = {
             description: ""
         }
     },
+    plugins: ['back-to-top'],
     theme: "reco",
+    codeTheme: 'tomorrow',
     themeConfig: {
         // Git项目地址，添加后会在导航栏的最后追加
         repo: 'lasilaso/blog',
@@ -180,7 +175,7 @@ module.exports = {
         lastUpdated: '上次更新时间',
         author: "鱼丸粗面",
         authorAvatar: 'logo.png', // 作者头像
-        mode: 'dark', // 默认auto
+        mode: 'auto', // 默认auto
         modePicker: true, // 默认true, 即可以切换模式
         startYear: 2019,
         type: 'blog', // 主题类型
@@ -219,24 +214,23 @@ module.exports = {
                         text: "Spring",
                         link: "/spring/"
                     },
-                    /**
-                    {
-                        text: "Mybatis",
-                        link: "/mybatis/"
-                    },
-                     */
                     {
                         text: "Dubbo",
                         link: "/dubbo/"
                     },
                     /**
                     {
-                        text: "Netty",
-                        link: "/netty/"
-                    },
-                    {
                         text: "Tomcat",
                         link: "/tomcat/"
+                    },
+                    
+                    {
+                        text: "Mybatis",
+                        link: "/mybatis/"
+                    },
+                    {
+                        text: "Netty",
+                        link: "/netty/"
                     },
                     {
                         text: "Zookeeper",
@@ -282,13 +276,13 @@ module.exports = {
             },
             /**
             {
-                text: "算法专题",
+                text: "算法",
                 link: "/algorithm/"
             },
             */
             /*
             {
-                text: "面试专题",
+                text: "面试",
                 link: "/interview/"
             },
             
@@ -320,82 +314,88 @@ module.exports = {
         sidebar: {  
             '/java/': [
                 {
-                    title: "Java专题",
+                    title: "Java",
                     collapsable: false,
                     children: javaArr
                 }
             ],
             '/jvm/': [
                 {
-                    title: "Jvm专题",
+                    title: "Jvm",
                     collapsable: false,
                     children: jvmArr
                 }
             ],
             '/spring/': [
                 {
-                    title: "Spring专题",
+                    title: "Spring",
                     collapsable: false,
                     children: springArr
                 }
             ],
-            // mybatis
             '/dubbo/': [
                 {
-                    title: "Dubbo专题",
+                    title: "Dubbo",
                     collapsable: false,
                     children: dubboArr
                 }
             ],
-            '/netty/': [
-                {
-                    title: "Netty专题",
-                    collapsable: false,
-                    children: nettyArr
-                }
-            ],
             '/tomcat/': [
                 {
-                    title: "Tomcat专题",
+                    title: "Tomcat",
                     collapsable: false,
                     children: tomcatArr
                 }
             ],
-            // zk
+            '/netty/': [
+                {
+                    title: "Netty",
+                    collapsable: false,
+                    children: nettyArr
+                }
+            ],
+            '/mybatis/': [
+                {
+                    title: "Mybatis",
+                    collapsable: false,
+                    children: mybatisArr
+                }
+            ],
+            '/zookeeper/': [
+                {
+                    title: "Zookeeper",
+                    collapsable: false,
+                    children: zkArr
+                }
+            ],
             '/db/mysql/': [
                 {
-                    title: "MySQL专题",
+                    title: "MySQL",
                     collapsable: false,
                     children: mysqlArr
                 }
             ],
-            '/db/mongodb/': [
+            '/redis/': [
                 {
-                    title: "MongoDB专题",
+                    title: "Redis",
                     collapsable: false,
-                    children: mongoArr
+                    children: redisArr
                 }
             ],
             // hbase
             // es
             // ck
-            '/redis/': [
-                {
-                    title: "Redis专题",
-                    collapsable: false,
-                    children: redisArr
-                }
-            ],
+            // mongodb
             '/mq/': [
                 {
-                    title: "消息中间件专题",
+                    title: "消息中间件",
                     collapsable: false,
                     children: mqArr
                 }
             ],
             '/interview/': [
                 {
-                    title: "面试专题",
+                    title: "面试",
                     collapsable: false,
                     children: interviewArr
                 }

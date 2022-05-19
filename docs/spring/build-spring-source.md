@@ -1,4 +1,15 @@
-# 编译Spring源码
+---
+title: 如何编译 Spring 源码
+date: 2022-05-09
+categories:
+- spring
+tags:
+- spring
+sidebar: auto
+publish: false
+---
+
+## 步骤
 
 ```json
 // Spring 最新的源码是用gradle build的

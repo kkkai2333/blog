@@ -1,4 +1,13 @@
-# Redis 高可用方案
+---
+title: 高可用方案
+date: 2022-05-09
+categories:
+- redis
+tags:
+- redis
+sidebar: auto
+publish: false
+---
 
 **注：在Redis客户端，可以通过以下命令，指定当前的Redis server作为某一台Redis server的slave。**
 

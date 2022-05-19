@@ -1,3 +1,14 @@
+---
+title: bak
+date: 2022-05-09
+categories:
+- redis
+tags:
+- redis
+sidebar: auto
+publish: false
+---
+
 ## 布隆过滤器
 
 ## 一致性hash算法

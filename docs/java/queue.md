@@ -1,4 +1,14 @@
-# Java 队列
+---
+title: Java 中的队列
+date: 2020-10-27
+categories:
+- java
+tags:
+- java
+- queue
+sidebar: auto
+publish: false
+---
 
 ## 源码分析
 

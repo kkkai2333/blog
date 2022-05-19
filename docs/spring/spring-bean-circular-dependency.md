@@ -1,5 +1,5 @@
 ---
-title: Spring Bean 循环依赖
+title: Spring 如何解决 Bean 的循环依赖
 date: 2020-10-27
 categories:
 - spring

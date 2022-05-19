@@ -1,9 +1,10 @@
 ---
-title: Java 集合
+title: Java 中的集合
 date: 2020-10-27
 categories:
-- 集合
+- java
 tags:
+- java
 - collection
 sidebar: auto
 publish: false

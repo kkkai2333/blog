@@ -6,4 +6,3 @@ bgImage: /bg2.png
 heroText: Hello World
 tagline: stay hungry stay foolish
 ---
-

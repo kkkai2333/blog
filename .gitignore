@@ -2,3 +2,4 @@ node_modules
 docs/.vuepress/dist
 snap
 git_push.sh
+draft

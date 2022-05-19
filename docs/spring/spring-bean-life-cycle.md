@@ -1,4 +1,13 @@
-# Spring bean 生命周期
+---
+title: Spring Bean 的生命周期
+date: 2022-05-09
+categories:
+- spring
+tags:
+- spring
+sidebar: auto
+publish: false
+---
 
 ## 问题
 

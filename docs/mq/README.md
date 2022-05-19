@@ -1,4 +1,9 @@
-# 消息中间件专题
+---
+title: 消息中间件(MQ)
+date: 2022-05-09
+sidebar: auto
+publish: false
+---
 
 ## 为什么需要MQ
 

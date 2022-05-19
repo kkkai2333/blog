@@ -1,4 +1,13 @@
-# Spring 中的设计模式
+---
+title: Spring 中的设计模式
+date: 2022-05-09
+categories:
+- spring
+tags:
+- spring
+sidebar: auto
+publish: false
+---
 
 ## Spring中使用了哪些设计模式
 

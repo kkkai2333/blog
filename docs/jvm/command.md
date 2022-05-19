@@ -1,4 +1,14 @@
-# 常用命令
+---
+title: Jvm 常用命令
+date: 2022-05-09
+categories:
+- jvm
+tags:
+- java
+- jvm
+sidebar: auto
+publish: false
+---
 
 #### java
 

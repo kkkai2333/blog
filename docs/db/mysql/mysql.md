@@ -4,7 +4,6 @@ date: 2020-10-27
 categories:
 - mysql
 tags:
-- db
 - mysql
 sidebar: auto
 publish: true

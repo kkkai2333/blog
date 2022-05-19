@@ -2,10 +2,10 @@
 title: AQS 源码分析
 date: 2020-10-27
 categories:
-- aqs
+- java
 tags:
+- java
 - juc
-- aqs
 sidebar: auto
 publish: false
 ---

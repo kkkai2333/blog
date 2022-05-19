@@ -2,9 +2,10 @@
 title: ReentrantLock 源码分析
 date: 2020-10-27
 categories:
-- juc
+- java
 tags:
-- 可重入锁
+- java
+- juc
 sidebar: auto
 publish: true
 ---

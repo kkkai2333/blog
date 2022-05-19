@@ -1,4 +1,14 @@
-# Java 内存模型
+---
+title: Java 的内存模型
+date: 2022-05-19
+categories:
+- java
+tags:
+- java
+- jmm
+sidebar: auto
+publish: false
+---
 
 ## 问题
 

@@ -1,5 +1,5 @@
 ---
-title: JVM 基础
+title: Jvm 基础
 date: 2020-10-27
 categories:
 - jvm

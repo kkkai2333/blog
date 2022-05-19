@@ -1,4 +1,14 @@
-# JVM 如何优化
+---
+title: Jvm 如何优化
+date: 2022-05-09
+categories:
+- java
+tags:
+- java
+- jvm
+sidebar: auto
+publish: false
+---
 
 ## 面试问题连环炮
 

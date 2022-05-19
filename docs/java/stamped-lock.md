@@ -1,9 +1,10 @@
 ---
-title: synchronized
+title: StampedLock 源码分析
 date: 2022-05-19
 categories:
 - java
 tags:
+- juc
 - java
 sidebar: auto
 publish: false
@@ -11,14 +12,7 @@ publish: false
 
 ## 问题
 
-## 分析
-
-### 特性
-
-* 可见性
-* 有序性
-* 原子性
-
-## 扩展
+## 源码分析
 
 ## 总结
+

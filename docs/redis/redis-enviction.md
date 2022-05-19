@@ -1,4 +1,13 @@
-# Redis 内存逐出策略
+---
+title: 内存逐出策略
+date: 2022-05-09
+categories:
+- redis
+tags:
+- redis
+sidebar: auto
+publish: false
+---
 
 ## 基础
 

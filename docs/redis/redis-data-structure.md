@@ -1,4 +1,13 @@
-# Redis 底层数据结构
+---
+title: 底层数据结构
+date: 2022-05-09
+categories:
+- redis
+tags:
+- redis
+sidebar: auto
+publish: false
+---
 
 ## dict
 

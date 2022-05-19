@@ -2,9 +2,10 @@
 title: Semaphore 源码分析
 date: 2020-10-27
 categories:
-- juc
+- java
 tags:
-- 信号量
+- java
+- juc
 sidebar: auto
 publish: true
 ---

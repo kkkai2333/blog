@@ -1,3 +1,14 @@
+---
+title: bak
+date: 2022-05-19
+categories:
+- java
+tags:
+- java
+sidebar: auto
+publish: false
+---
+
 ## 多线程
 
 1. 启动线程的方式有哪些？

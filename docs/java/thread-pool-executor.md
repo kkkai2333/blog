@@ -2,14 +2,15 @@
 title: ThreadPoolExecutor 线程池
 date: 2020-10-27
 categories:
-- juc
+- java
 tags:
-- 信号量
+- java
+- juc
 sidebar: auto
 publish: true
 ---
 
-**线程池也是并发编程中最常使用的技术之一, 池化的目的, 就是为了节约资源, 提高效率, 本文就简要分析下线程池的实现原理. **
+**线程池也是并发编程中最常使用的技术之一, 池化的目的, 就是为了节约资源, 提高效率, 本文就简要分析下线程池的实现原理.**
 
 ## 问题
 

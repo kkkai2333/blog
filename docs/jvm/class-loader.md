@@ -1,4 +1,14 @@
-# Java 类加载
+---
+title: Java 类加载
+date: 2022-05-09
+categories:
+- java
+tags:
+- java
+- jvm
+sidebar: auto
+publish: false
+---
 
 ### 执行过程
 

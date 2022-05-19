@@ -1,4 +1,13 @@
-# Spring 后置处理器
+---
+title: 后置处理器(bean processor)
+date: 2022-05-09
+categories:
+- spring
+tags:
+- spring
+sidebar: auto
+publish: false
+---
 
 **OK，废话不多说，今天我们来聊一下，spring 的后置处理器。**
 
