@@ -144,7 +144,7 @@ const ckArr = [
 ]
 
 module.exports = {
-    title: '孤帆远影碧空尽',
+    title: 'Damon\'s Blog',
     description: 'Hello World',
     base: "/",
     head: [
@@ -163,11 +163,11 @@ module.exports = {
     codeTheme: 'tomorrow',
     themeConfig: {
         // Git项目地址，添加后会在导航栏的最后追加
-        repo: 'lasilaso/blog',
+        // repo: 'lasilaso/blog',
         // 启用编辑
-        editLinks: true,
+        // editLinks: true,
         // 编辑按钮的 Text
-        editLinkText: '在GitHub上编辑此页',
+        // editLinkText: '在GitHub上编辑此页',
         // 编辑文档的所在目录
         docsDir: 'docs',
         // 假如文档放在一个特定的分支下：
