@@ -6,15 +6,23 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # 拉仓库代码
     steps:
     - name: Checkout
       uses: actions/checkout@master
+
+    # 步骤2 给当前服务器安装node
+    - name: use node
+      uses: actions/setup-node@v2
+        with:
+          node-version: 16 # node版本
+          # cache: "yarn"
 
     - name: Build and Install
       run: |
         npm install
         npm install vuepress-theme-reco
-        npm run --openssl-legacy-provider docs:build
+        npm run docs:build
 
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.4
