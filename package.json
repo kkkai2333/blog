@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/lasilaso/blog#readme",
   "dependencies": {
+    "caniuse-lite": "^1.0.30001561",
     "package.json": "2.0.1",
     "vuepress-plugin-sitemap": "^2.3.1"
   },
