@@ -146,7 +146,7 @@ const ckArr = [
 module.exports = {
     title: 'Damon\'s Blog',
     description: 'Hello World',
-    base: "/",
+    base: "/blog/",
     head: [
         ['link', { rel: 'icon', href: '/logo.png' }]
     ],
