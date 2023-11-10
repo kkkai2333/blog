@@ -12,10 +12,9 @@ jobs:
 
     - name: Build and Install
       run: |
-        set node_options=--openssl-legacy-provider
         npm install
         npm install vuepress-theme-reco
-        npm run docs:build
+        npm run --openssl-legacy-provider docs:build
 
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.4
