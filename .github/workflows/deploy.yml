@@ -12,19 +12,21 @@ jobs:
       uses: actions/checkout@master
 
     # 步骤2 给当前服务器安装node
-    - name: use node
+    - name: UseNode
       uses: actions/setup-node@v2
-        with:
-          node-version: 16 # node版本
-          # cache: "yarn"
+      with:
+        node-version: 16 # node版本
+        # cache: "yarn"
 
-    - name: Build and Install
+    - name: Install
       run: |
         npm install
         npm install vuepress-theme-reco
-        npm run docs:build
+    
+    - name: Build
+      run: npm run docs:build
 
-    - name: Build and Deploy
+    - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.4
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
