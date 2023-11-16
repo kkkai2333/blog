@@ -9,16 +9,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "dd": "vuepress dev docs",
+    "db": "vuepress build docs"
   },
-  "repository": "git+https://github.com/lasilaso/blog.git",
+  "repository": "git+https://github.com/stack0verflow1/blog.git",
   "keywords": [],
   "author": "yuwancumian",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lasilaso/blog/issues"
+    "url": "https://github.com/stack0verflow1/blog/issues"
   },
-  "homepage": "https://github.com/lasilaso/blog#readme",
+  "homepage": "https://github.com/stack0verflow1/blog#readme",
   "dependencies": {
     "caniuse-lite": "^1.0.30001561",
     "package.json": "2.0.1",

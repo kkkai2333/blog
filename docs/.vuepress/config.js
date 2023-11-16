@@ -146,7 +146,7 @@ const ckArr = [
 module.exports = {
     title: 'Damon\'s Blog',
     description: 'Hello World',
-    base: "/blog/",
+    // base: "/blog/",
     head: [
         ['link', { rel: 'icon', href: '/logo.png' }]
     ],
@@ -163,7 +163,6 @@ module.exports = {
     codeTheme: 'tomorrow',
     themeConfig: {
         // Git项目地址，添加后会在导航栏的最后追加
-        // repo: 'lasilaso/blog',
         // 启用编辑
         // editLinks: true,
         // 编辑按钮的 Text
