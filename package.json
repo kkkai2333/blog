@@ -29,6 +29,6 @@
   "devDependencies": {
     "vuepress": "^1.9.7",
     "vuepress-theme-reco": "^1.6.6",
-    "yarn": "^1.22.10"
+    "yarn": "^1.22.13"
   }
 }
